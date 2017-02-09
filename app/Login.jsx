@@ -12,6 +12,10 @@ class Login extends Component {
 			</div>
 		)
 	}
+
+	login() {
+		
+	}
 }
 
 export default Login;

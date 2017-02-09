@@ -35,7 +35,9 @@ class Home extends Component {
 								<input type="text" name="account" className="bg-login-input"/>
 								<label htmlFor="password" className="bg-login-label">Password:</label>
 								<input type="password" name="password" className="bg-login-input"/>
-								<button type="submit">Login</button>
+								<Link to="entrance">
+									<button type="submit">Login</button>
+								</Link>
 							</form>
 						</div>
 					</div>
@@ -43,6 +45,8 @@ class Home extends Component {
 			</div>
 		)
 	}
+
+
 }
 
 export default Home;
