@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Login extends Component {
 	constructor(props) {
@@ -18,4 +19,12 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+function mergeStateToProps() {
+
+}
+
+function mergeDispatcherToProps() {
+
+}
+
+export default connect(mergeStateToProps, mergeDispatcherToProps)(Login);
