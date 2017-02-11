@@ -3,8 +3,12 @@ node_modules
 
 # production
 dist
+build
 
 # misc
 .env
 .DS_Store
 npm-debug.log*
+
+# assets
+**/assets/**

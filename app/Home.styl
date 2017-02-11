@@ -1,21 +1,26 @@
 .Home
 	height: 100%;
-	
-	.bg-navbar
+	width: 100%;
+		
+	.bg-container
+		display: flex;
+		flex-flow: row nowrap;
+		height: 100%;
 		width: 100%;
-		background: orange;
-		border-radius: 0px;
-	
-		.bg-icon
-			width: 64px;
-			height: 64px;
-			float: left;
-			background: white;
+			
+		.bg-paper
+			flex: 1 1 0;
+			height: 100%;
+			background-color: white;
 
-		.bg-link
-			color: white;
+			box-shadow: 0 5px 20px #333;
 
-		.bg-link:hover
-			color: #888;
-			background: white;
-	
+		.bg-background
+			display: flex;
+			justify-content: center;
+
+			flex: 1 1 0;
+			height: 100%;
+			overflow: hidden;
+
+			z-index: -1;

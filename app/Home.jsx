@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './Home.styl';
 
+import './assets/chess1.jpg';
+
 class Home extends Component {
 	constructor(props) {
 		super(props);
@@ -10,7 +12,19 @@ class Home extends Component {
 	render() {
 		return (
 			<div className="Home">
-				<nav className="navbar bg-navbar">
+
+				<div className="bg-container">
+					<div className="bg-paper">
+
+					</div>
+
+					<div className="bg-background">
+						<img src="./assets/chess1.jpg" alt="chess" height="100%"/>
+					</div>
+				</div>
+
+
+				{/*<nav className="navbar bg-navbar">
 					<div className="bg-icon"></div>
 
 					<div className="bg-nav-right">
@@ -41,7 +55,9 @@ class Home extends Component {
 							</form>
 						</div>
 					</div>
-				</div>
+				</div>*/}
+
+
 			</div>
 		)
 	}

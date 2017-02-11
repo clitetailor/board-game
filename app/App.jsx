@@ -9,7 +9,6 @@ import Login from './Login';
 import NoMatch from './NoMatch';
 import { store } from './reducer';
 
-import logo from './logo.svg';
 import './App.styl';
 
 class App extends Component {
