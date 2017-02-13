@@ -1,7 +1,9 @@
+@import './device.styl'
+
 .Home
 	height: 100%;
 	width: 100%;
-		
+	
 	.bg-container
 		display: flex;
 		flex-flow: row nowrap;
@@ -11,16 +13,20 @@
 		.bg-paper
 			flex: 1 1 0;
 			height: 100%;
-			background-color: white;
 
-			box-shadow: 0 5px 20px #333;
+			box-shadow: 0 5px 10px alpha(#000, 0.5);
 
 		.bg-background
 			display: flex;
 			justify-content: center;
+			align-items: center;
 
 			flex: 1 1 0;
 			height: 100%;
 			overflow: hidden;
 
 			z-index: -1;
+
+			.bg-image
+				flex: 0 0 auto;
+				height: 100%;

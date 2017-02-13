@@ -19,7 +19,7 @@ class Home extends Component {
 					</div>
 
 					<div className="bg-background">
-						<img src="./assets/chess1.jpg" alt="chess" height="100%"/>
+						<img src="./assets/chess1.jpg" alt="chess" className="bg-image"/>
 					</div>
 				</div>
 
