@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import * as $ from 'jquery';
 import './Home.styl';
 
-import './assets/chess1.jpg';
+import './assets/chess.jpg';
 
 class Home extends Component {
 	constructor(props) {
@@ -15,54 +16,41 @@ class Home extends Component {
 
 				<div className="bg-container">
 					<div className="bg-paper">
-
-					</div>
-
-					<div className="bg-background">
-						<img src="./assets/chess1.jpg" alt="chess" className="bg-image"/>
-					</div>
-				</div>
-
-
-				{/*<nav className="navbar bg-navbar">
-					<div className="bg-icon"></div>
-
-					<div className="bg-nav-right">
-						<Link to="about">About</Link>
-						<Link to="news">News</Link>
-						<Link to="login">Login</Link>
-					</div>
-				</nav>
-
-				<div>
-					<div className="bg-typography">
-						<img src="" alt="boardgame"/>
-						<h1>
-							Title
-						</h1>
-						<p>
-							Description
-						</p>
 						<div className="bg-login-form">
 							<form action="#">
-								<label htmlFor="account" className="bg-login-label">Account:</label>
-								<input type="text" name="account" className="bg-login-input"/>
-								<label htmlFor="password" className="bg-login-label">Password:</label>
-								<input type="password" name="password" className="bg-login-input"/>
-								<Link to="entrance">
-									<button type="submit">Login</button>
-								</Link>
+								<label htmlFor="account">Username:</label>
+								<input ref={ (input) => { this.usernameInput = input } } type="text" name="account"/>
+								<label htmlFor="password">Password:</label>
+								<input ref={ (input) => { this.passwordInput = input } } type="password" name="password"/>
+								<button type="button" onClick={() => this.login()}>Login</button>
 							</form>
 						</div>
 					</div>
-				</div>*/}
 
+					<div className="bg-background">
+						<img src="./assets/chess.jpg" alt="chess" className="bg-image"/>
+					</div>
+				</div>
 
 			</div>
 		)
 	}
 
+	login() {
+		let data = {
+			username: this.usernameInput.value,
+			password: this.passwordInput.value
+		}
 
+		$.ajax({
+			type: 'POST',
+			url: '/login',
+			data: JSON.stringify(data),
+			contentType: 'application/json; charset=utf-8'
+		}).then((data) => {
+			console.log(data);
+		})
+	}
 }
 
 export default Home;

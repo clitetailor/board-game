@@ -1,13 +1,26 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+let express = require('express');
+let app = express();
 
-app.use(express.static('dist'))
+let bodyParser = require('body-parser');
+let multer = require('multer');
+let upload = multer();
 
-app.get('/', function(req, res) {
-	res.send('Hello World!');
+let port = 9000;
+
+app.use(express.static(`${__dirname}/dist`));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
+
+let server = app.listen(process.env.PORT || port, function() {
+	let port = server.address().port;
+	console.log(`App listening on port ${port}`);
 })
 
-app.listen(port, function() {
-	console.log(`App listening on port ${port}`);
+app.get('/', function(req, res) {
+	res.sendFile(path.join(__dirname, '/dist/index.html'));
+})
+
+app.post('/login', upload.array(), function(req, res) {
+	console.log(req.body);
+	res.send(req.body);
 })
