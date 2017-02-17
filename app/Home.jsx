@@ -18,10 +18,14 @@ class Home extends Component {
 					<div className="bg-paper">
 						<div className="bg-login-form">
 							<form action="#">
-								<label htmlFor="account">Username:</label>
-								<input ref={ (input) => { this.usernameInput = input } } type="text" name="account"/>
-								<label htmlFor="password">Password:</label>
-								<input ref={ (input) => { this.passwordInput = input } } type="password" name="password"/>
+								<div className="bg-input">
+									<label htmlFor="account">USERNAME</label>
+									<input ref={ (input) => { this.usernameInput = input } } type="text" name="account"/>
+								</div>
+								<div className="bg-input">
+									<label htmlFor="password">PASSWORD</label>
+									<input ref={ (input) => { this.passwordInput = input } } type="password" name="password"/>
+								</div>
 								<button type="button" onClick={() => this.login()}>Login</button>
 							</form>
 						</div>
