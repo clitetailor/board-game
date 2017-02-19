@@ -1,19 +1,24 @@
-@import './styles.styl'
+@import '../styles.styl'
 
 $input-height = 48px
 $input-width = 500px
 
-LargeInput 
+.LargeInput
+	position relative
+
 	background white
 	width $input-width
 	height $input-height
 	margin-bottom 12px
-	
-	position relative
-	background white
 
 	border-radius $border-radius-small
-	box-shadow $box-shadow-primary
+	box-shadow $box-shadow-primary-inset
+
+	cursor text
+	user-select none
+	for vendor in vendors
+		{vendor}-cursor text
+		{vendor}-user-select none
 
 	input, label
 		position absolute
@@ -29,15 +34,19 @@ LargeInput
 		color $font-light
 		background transparent
 		font-weight normal
+		text-transform uppercase
+
+		&.invisible
+			color transparent
+		
+		^[0].focus label
+			color transparent
 
 	input
-		width $input-width - 440px
+		width $input-width - 60px
 		background transparent
 		
 		color $font-smooth
 		border none;
 		outline none
 		transition all ease-in-out $speed-rapid
-
-		&:focus
-			background white

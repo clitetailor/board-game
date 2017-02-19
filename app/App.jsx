@@ -7,6 +7,7 @@ import Entrance from './Entrance';
 import Room from './Room';
 import Login from './Login';
 import NoMatch from './NoMatch';
+import SignUp from './SignUp';
 import { store } from './reducer';
 
 import './App.styl';
@@ -18,7 +19,7 @@ class App extends Component {
         <Provider store={ store }>
 
           <Router history={ browserHistory } >
-            <Route path="/" component={ Home }>
+            <Route path="/" component={ SignUp }>
               <Route path="login" component={ Login }></Route>
               <Route path="entrance" component={ Entrance }></Route>
               <Route path="room/:id" component={ Room }></Route>

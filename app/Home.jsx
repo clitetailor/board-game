@@ -5,6 +5,10 @@ import './Home.styl';
 
 import './assets/chess.jpg';
 
+
+import { LargeInput, LargeButton } from './components';
+
+
 class Home extends Component {
 	constructor(props) {
 		super(props);
@@ -18,15 +22,18 @@ class Home extends Component {
 					<div className="bg-paper">
 						<div className="bg-login-form">
 							<form action="#">
-								<div className="bg-input">
-									<label htmlFor="account">USERNAME</label>
-									<input ref={ (input) => { this.usernameInput = input } } type="text" name="account"/>
+								<div className="row">
+									<LargeInput label="username" type="input" ref={(input) => { this.usernameInput = input }}></LargeInput>
 								</div>
-								<div className="bg-input">
-									<label htmlFor="password">PASSWORD</label>
-									<input ref={ (input) => { this.passwordInput = input } } type="password" name="password"/>
+								<div className="row">
+									<LargeInput label="password" type="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
 								</div>
-								<button type="button" onClick={() => this.login()}>Login</button>
+								<div className="row bg-button-group">
+									<LargeButton onClick={() => { this.login(); }}>Login</LargeButton>
+									<Link to="/signup">
+										<LargeButton onClick={() => { this.signUp(); }}>Sign Up</LargeButton>
+									</Link>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -46,14 +53,24 @@ class Home extends Component {
 			password: this.passwordInput.value
 		}
 
-		$.ajax({
+		let request = $.ajax({
 			type: 'POST',
 			url: '/login',
 			data: JSON.stringify(data),
 			contentType: 'application/json; charset=utf-8'
-		}).then((data) => {
+		})
+
+		request.done(data => {
 			console.log(data);
 		})
+
+		request.fail(err => {
+
+		})
+	}
+
+	signUp() {
+
 	}
 }
 

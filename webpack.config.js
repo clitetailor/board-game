@@ -27,7 +27,13 @@ module.exports = {
 		filename: "[name].js",
 	},
 
-	devtool: "cheap-eval-source-map",
+	resolve: {
+		alias: {
+			'utils':  path.resolve('./app/utils')
+		}
+	},
+
+	devtool: "source-map",
 	target: "web",
 
 	module: {
