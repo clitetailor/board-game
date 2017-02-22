@@ -9,33 +9,34 @@ class Entrance extends Component {
 	render() {
 		return (
 			<div className="Entrance">
-				<div className="fluid-container">
-					<nav className="bg-navbar">
-						<button className="bg-button">Back</button>
-						<div className="bg-nav-right">
-							{/*TODO: Login icon component*/}
-						</div>
-					</nav>
+				
+				<nav className="navbar">
+					<div className="brand">
+						<div className="brand-typo">Chess.io</div>
+					</div>
+				</nav>
 
-					<div className="row">
-						<div className="col-lg-6">
-							{/*TODO: List of rooms*/}
+				<div className="outer-wrapper">
+					<div className="content">
+						<div className="rooms">
+							<div className="card">
+								
+							</div>
 						</div>
-						<div className="col-lg-6">
-							<div className="row">
+						<div className="info">
+							<div className="card">
 								{/*TODO: Create a new room*/}
 							</div>
-
-							<div className="row">
+							<div className="card">
 								{/*TODO: Dashboard*/}
 							</div>
-							
-							<div className="row">
+							<div className="card">
 								{/*TODO: Find room*/}
 							</div>
 						</div>
 					</div>
 				</div>
+
 			</div>
 		)
 	}

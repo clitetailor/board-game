@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Router, Route, Link, hashHistory, browserHistory, createMemoryHistory, Redirect } from 'react-router';
 import { Provider } from 'react-redux';
 
 import Home from './Home';
@@ -18,12 +18,12 @@ class App extends Component {
       <div className="App">
         <Provider store={ store }>
 
-          <Router history={ browserHistory } >
-            <Route path="/" component={ SignUp }>
-              <Route path="login" component={ Login }></Route>
-              <Route path="entrance" component={ Entrance }></Route>
-              <Route path="room/:id" component={ Room }></Route>
-            </Route>
+          <Router history={ browserHistory }>
+            <Route path="/" component={ Entrance }></Route>
+            <Route path="/signup" component={ SignUp }></Route>
+            <Route path="/login" component={ Login }></Route>
+            <Route path="/entrance" component={ Entrance }></Route>
+            <Route path="/room/:id" component={ Room }></Route>
             <Route path="*" component={ NoMatch }></Route>
           </Router>
 

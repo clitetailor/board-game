@@ -17,10 +17,19 @@ let server = app.listen(process.env.PORT || port, function() {
 })
 
 app.get('/', function(req, res) {
-	res.sendFile(path.join(__dirname, '/dist/index.html'));
+	res.sendFile(path.resolve('/dist/index.html'));
+})
+
+app.get('/login', function(req, res) {
+	res.sendFile(path.resolve('./dist/index.html'));
 })
 
 app.post('/login', upload.array(), function(req, res) {
+	console.log(req.body);
+	res.send(req.body);
+})
+
+app.post('/signup', upload.array(), function(req, res) {
 	console.log(req.body);
 	res.send(req.body);
 })

@@ -15,3 +15,9 @@ $border-radius-large = 8px
 
 $font-smooth = #666
 $font-light = #aaa
+
+long-shadow(color, length)
+    $shadow = "-1px 1px 0 " + color
+    for i in range(2, length)
+        $shadow = $shadow + ", -" + i + "px " + i + "px 0 " + color
+    unquote($shadow)

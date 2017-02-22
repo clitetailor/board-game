@@ -6,7 +6,6 @@ module.exports = {
 		main: './index.jsx',
 		vendor: [
 			'jquery',
-			'bootstrap',
 			'react',
 			'react-redux',
 			'react-dom',
@@ -15,22 +14,16 @@ module.exports = {
 	},
 
 	devServer: {
-		contentBase: path.join(__dirname, "dist"),
+		contentBase: path.join("./dist"),
 		compress: true,
 		port: 9000
 	},
 
-	context: path.resolve(__dirname, 'app'),
+	context: path.resolve('./app'),
 
 	output: {
-		path: path.resolve(__dirname, "dist"),
+		path: path.resolve("./dist"),
 		filename: "[name].js",
-	},
-
-	resolve: {
-		alias: {
-			'utils':  path.resolve('./app/utils')
-		}
 	},
 
 	devtool: "source-map",
@@ -82,8 +75,12 @@ module.exports = {
 	resolve: {
 		modules: [
 			"node_modules",
-			path.resolve(__dirname, "app")
+			path.resolve("./app")
 		],
+
+		alias: {
+			app: path.resolve('./app')
+		},
 
 		extensions: ['.js', '.json', '.jsx', '.styl', '.css'],
 	},

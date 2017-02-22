@@ -13,20 +13,32 @@ class SignUp extends Component {
 	render() {
 		return (
 			<div className="SignUp">
-				<form className="bg-form">
-					<div className="row">
-						<LargeInput type='input' label='username' ref={(input) => { this.usernameInput = input }}></LargeInput>
+				<nav className="nav-bar">
+					<div className="brand">
+						<div className="brand-typo">Chess.io</div>
 					</div>
-					<div className="row">
-						<LargeInput type="input" label="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
+				</nav>
+
+				<div className="outer-wrapper">
+					<div className="form">
+						<form>
+							<div className="row">
+								<LargeInput type='input' label='username' ref={(input) => { this.usernameInput = input }}></LargeInput>
+							</div>
+							<div className="row">
+								<LargeInput type="input" label="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
+							</div>
+							<div className="row">
+								<LargeInput type="input" label="confirm password" ref={(input) => { this.confirmPasswordInput = input }}></LargeInput>
+							</div>
+							<div className="row bg-button-group">
+								<LargeButton onClick={() => { this.submit() }}>Submit</LargeButton>
+							</div>
+						</form>
 					</div>
-					<div className="row">
-						<LargeInput type="input" label="confirm password" ref={(input) => { this.confirmPasswordInput = input }}></LargeInput>
-					</div>
-					<div className="row bg-button-group">
-						<LargeButton onClick={() => { this.submit() }}>Submit</LargeButton>
-					</div>
-				</form>
+				</div>
+
+				<div className="footer"></div>
 			</div>
 		)
 	}

@@ -4,7 +4,7 @@
   "description": "board-game",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "webpack-dev-server",
     "build": "webpack --watch --progress --colors --env production"
   },
   "author": "clitetailor",

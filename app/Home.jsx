@@ -17,32 +17,28 @@ class Home extends Component {
 	render() {
 		return (
 			<div className="Home">
+				<div className="outer-wrapper">
+					<nav className="nav-bar">
+						<div className="brand-icon">Chess.io</div>
+					</nav>
 
-				<div className="bg-container">
-					<div className="bg-paper">
-						<div className="bg-login-form">
-							<form action="#">
-								<div className="row">
-									<LargeInput label="username" type="input" ref={(input) => { this.usernameInput = input }}></LargeInput>
-								</div>
-								<div className="row">
-									<LargeInput label="password" type="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
-								</div>
-								<div className="row bg-button-group">
-									<LargeButton onClick={() => { this.login(); }}>Login</LargeButton>
-									<Link to="/signup">
-										<LargeButton onClick={() => { this.signUp(); }}>Sign Up</LargeButton>
-									</Link>
-								</div>
-							</form>
-						</div>
-					</div>
-
-					<div className="bg-background">
-						<img src="./assets/chess.jpg" alt="chess" className="bg-image"/>
+					<div className="login-form">
+						<form action="#" className="login-form">
+							<LargeInput label="username" type="input" ref={(input) => { this.usernameInput = input }}></LargeInput>
+							<LargeInput label="password" type="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
+							<div className="button-group">
+								<LargeButton onClick={() => { this.login(); }}>Login</LargeButton>
+								<Link to="/signup">
+									<LargeButton>Sign Up</LargeButton>
+								</Link>
+							</div>
+						</form>
 					</div>
 				</div>
 
+				<div className="background">
+					<img src="./assets/chess.jpg" alt="chess" className="background-image"/>
+				</div>
 			</div>
 		)
 	}
