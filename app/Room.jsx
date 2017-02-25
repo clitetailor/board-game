@@ -1,6 +1,5 @@
-import './assets/favicon.ico';
-import './index.styl';
-import './room.html';
+import './index.js'
+import './room.html'
 
 import React, { Component } from 'react';
 import './Room.styl';
@@ -33,3 +32,8 @@ class Room extends Component {
 		)
 	}
 }
+
+ReactDOM.render(
+	<Room />,
+	document.getElementById('root')
+)

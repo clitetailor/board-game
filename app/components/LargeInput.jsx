@@ -2,24 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './LargeInput.styl';
 
-import toClassName from 'utils/className';
+import { removeKeys, toClassName } from 'utils/className';
 
 const defaultProps = {
 	type: 'input'
 }
 
-function removeKeys(props, keys) {
-	let newProps = Object.assign({}, props);
-
-	for (let key in keys) {
-		newProps[key] = undefined;
-	}
-
-	return newProps;
-}
-
-
 export class LargeInput extends Component {
+	/**
+	 * @param {{ type: string, label: string, name: string }} props
+	 */
 	constructor(props = defaultProps) {
 		super(props);
 
@@ -36,18 +28,17 @@ export class LargeInput extends Component {
 				onClick={() => { this.onClick() }}>
 					<label
 						className={ toClassName({ invisible: this.state.labelInvisible }) }
-						htmlFor={ this.props.label }
+						htmlFor={ this.props.name }
 						ref={ (label) => { this.label = label } }>
-							{ this.props.label }
+							{this.props.label}
 					</label>
 					<input
-						name={ this.props.label }
-						type={ this.props.type }
 						ref={(input) => { this.textInput=input }}
 						onChange={() => { this.inputCheck() }}
 						onBlur={() => { this.onBlur() }}
 						onFocus={() => { this.onFocus() }}
-						{...removeKeys(this.props)}/>
+						name={ this.props.name }
+						{...removeKeys(this.props, ['label'])}/>
 			</div>
 		)
 	}

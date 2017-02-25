@@ -1,14 +1,13 @@
 import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import * as $ from 'jquery';
+import { LargeInput, LargeButton } from './components';
 import './assets/favicon.ico';
 import './index.styl';
+import './index.html'
 import './signup.html';
-
-import React, { Component } from 'react';
 import './SignUp.styl';
 
-import * as $ from 'jquery';
-
-import { LargeInput, LargeButton } from './components';
 
 class SignUp extends Component {
 	constructor(props) {
@@ -31,10 +30,10 @@ class SignUp extends Component {
 								<LargeInput type='input' label='username' ref={(input) => { this.usernameInput = input }}></LargeInput>
 							</div>
 							<div className="row">
-								<LargeInput type="input" label="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
+								<LargeInput type="password" label="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
 							</div>
 							<div className="row">
-								<LargeInput type="input" label="confirm password" ref={(input) => { this.confirmPasswordInput = input }}></LargeInput>
+								<LargeInput type="password" label="confirm password" ref={(input) => { this.confirmPasswordInput = input }}></LargeInput>
 							</div>
 							<div className="row bg-button-group">
 								<LargeButton onClick={() => { this.submit() }}>Submit</LargeButton>
@@ -58,8 +57,14 @@ class SignUp extends Component {
 			let request = $.ajax({
 				type: 'POST',
 				url: '/signup',
-				data,
+				data: JSON.stringify(data),
 				contentType: 'application/json; charset=utf-8'
+			})
+			.then(() => {
+				
+			})
+			.catch((err) => {
+				console.log(err);
 			})
 		}
 	}
@@ -68,4 +73,4 @@ class SignUp extends Component {
 ReactDOM.render(
 	<SignUp />,
 	document.getElementById('root')
-)
+);

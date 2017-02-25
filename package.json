@@ -4,8 +4,10 @@
   "description": "board-game",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack --watch --progress --colors --env production"
+    "start": "concurrently \"npm run server\" \"npm run build\" \"npm run db\"",
+    "server": "node index.js",
+    "build": "webpack --watch --progress --colors --env production",
+    "db": "mongod --dbpath=./data"
   },
   "author": "clitetailor",
   "license": "ISC",
@@ -29,6 +31,7 @@
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.1.8",
     "babel-preset-react": "^6.22.0",
+    "concurrently": "^3.3.0",
     "css-loader": "^0.26.1",
     "file-loader": "^0.9.0",
     "style-loader": "^0.13.1",

@@ -10,7 +10,7 @@ $tea-green = #c9da7b
 	display flex
 	flex-flow row nowrap
 		
-	> .outer-wrapper
+	.outer-wrapper
 		display flex
 		flex-flow column nowrap
 		justify-content center
@@ -31,11 +31,11 @@ $tea-green = #c9da7b
 		
 		box-shadow 0 5px 20px alpha(#000, 0.5)
 
-		> .nav-bar
+		.nav-bar
 			position absolute
 			top 0px
 
-			> .brand-icon
+			.brand-icon
 				position relative
 				margin-left 30px
 
@@ -58,7 +58,7 @@ $tea-green = #c9da7b
 					z-index -1
 				*/
 
-		> .login-form
+		.login-form
 			position relative
 
 			padding-top 40px
@@ -67,11 +67,11 @@ $tea-green = #c9da7b
 			display flex
 			justify-content center
 
-			> * > .button-group
-				> :not(:first-child)
+			.button-group
+				:not(:first-child)
 					margin-left 20px
 
-	> .background
+	.background
 		display flex
 		justify-content center
 		align-items center
@@ -82,6 +82,6 @@ $tea-green = #c9da7b
 
 		z-index -1
 
-		> .background-image
+		.background-image
 			flex 0 0 auto
 			height 100%

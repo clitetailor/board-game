@@ -1,6 +1,5 @@
-import './assets/favicon.ico';
-import './index.styl';
-import './index.html';
+import './index.js';
+import './nomatch.html';
 
 import React, { Component } from 'react';
 
@@ -18,4 +17,7 @@ class NoMatch extends Component {
 	}
 }
 
-export default NoMatch;
+ReactDOM.render(
+	<NoMatch />,
+	document.getElementById('root')
+)

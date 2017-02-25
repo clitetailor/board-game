@@ -1,6 +1,4 @@
-import './assets/favicon.ico';
-import './index.styl';
-import './gameplay.html';
+import './index.js'
 
 import React, { Component } from 'react';
 import "GamePlay.styl";
@@ -30,3 +28,8 @@ class GamePlay extends Component {
 		)
 	}
 }
+
+ReactDOM.render(
+	<GamePlay />,
+	document.getElementById('root')
+)

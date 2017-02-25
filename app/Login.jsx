@@ -1,9 +1,8 @@
-import './assets/favicon.ico';
-import './index.styl';
-import './login.html';
-
+import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import './assets/favicon.ico';
+import 'index.styl';
+import 'signup.html'
 
 class Login extends Component {
 	constructor(props) {
@@ -23,12 +22,7 @@ class Login extends Component {
 	}
 }
 
-function mergeStateToProps() {
-
-}
-
-function mergeDispatcherToProps() {
-
-}
-
-export default connect(mergeStateToProps, mergeDispatcherToProps)(Login);
+ReactDOM.render(
+	<Login />,
+	document.getElementById('root')
+)

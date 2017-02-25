@@ -24,16 +24,15 @@ class App extends Component {
 					</nav>
 
 					<div className="login-form">
-						<form action="#" className="login-form">
-							<LargeInput label="username" type="input" ref={(input) => { this.usernameInput = input }}></LargeInput>
-							<LargeInput label="password" type="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
+						<form action="#">
+							<LargeInput label="username" name="username" type="input" ref={(input) => { this.usernameInput = input }}></LargeInput>
+							<LargeInput label="password" name="password" type="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
+							
 							<div className="button-group">
 								<LargeButton onClick={() => { this.login(); }}>Login</LargeButton>
-								<nav>
-									<a href="./signup">
-										<LargeButton>Sign Up</LargeButton>
-									</a>
-								</nav>
+								<a href="./signup">
+									<LargeButton>Sign Up</LargeButton>
+								</a>
 							</div>
 						</form>
 					</div>
