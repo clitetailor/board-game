@@ -1,7 +1,8 @@
-import './index.js'
-
 import React, { Component } from 'react';
-import "GamePlay.styl";
+import ReactDOM from 'react-dom';
+import './assets/favicon.ico';
+import './gameplay.html';
+import "./GamePlay.styl";
 
 class GamePlay extends Component {
 	constructor(props) {

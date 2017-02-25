@@ -1,10 +1,9 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
-import * as $ from 'jquery';
 import { LargeInput, LargeButton } from './components';
+import * as $ from 'jquery';
 import './assets/favicon.ico';
 import './index.styl';
-import './index.html'
 import './signup.html';
 import './SignUp.styl';
 
@@ -17,32 +16,38 @@ class SignUp extends Component {
 	render() {
 		return (
 			<div className="SignUp">
-				<nav className="nav-bar">
+				<nav className="navbar">
 					<div className="brand">
 						<div className="brand-typo">Chess.io</div>
 					</div>
 				</nav>
 
 				<div className="outer-wrapper">
-					<div className="form">
+					<div className="signup-form">
 						<form>
-							<div className="row">
-								<LargeInput type='input' label='username' ref={(input) => { this.usernameInput = input }}></LargeInput>
-							</div>
-							<div className="row">
-								<LargeInput type="password" label="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
-							</div>
-							<div className="row">
-								<LargeInput type="password" label="confirm password" ref={(input) => { this.confirmPasswordInput = input }}></LargeInput>
-							</div>
+							<LargeInput
+								type='input' label='username'
+								ref={(input) => { this.usernameInput = input }}
+							/>
+							<LargeInput
+								type="password" label="password"
+								ref={(input) => { this.passwordInput = input }}
+							/>
+							<LargeInput
+								type="password" label="confirm password"
+								ref={(input) => { this.confirmPasswordInput = input }}
+							/>
+
 							<div className="row bg-button-group">
-								<LargeButton onClick={() => { this.submit() }}>Submit</LargeButton>
+								<LargeButton
+									onClick={() => this.submit()}
+								>
+									Submit
+								</LargeButton>
 							</div>
 						</form>
 					</div>
 				</div>
-
-				<div className="footer"></div>
 			</div>
 		)
 	}
@@ -60,8 +65,12 @@ class SignUp extends Component {
 				data: JSON.stringify(data),
 				contentType: 'application/json; charset=utf-8'
 			})
-			.then(() => {
-				
+			.then((data) => {
+				if (data.err) {
+					console.log(data.err);
+				} else {
+					location.href = "/"
+				}
 			})
 			.catch((err) => {
 				console.log(err);

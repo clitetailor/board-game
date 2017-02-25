@@ -1,8 +1,8 @@
-import './index.js'
-import './room.html'
-
 import React, { Component } from 'react';
-import './Room.styl';
+import ReactDOM from 'react-dom';
+import './assets/favicon.ico';
+import "./Room.styl";
+import './room.html'
 
 class Room extends Component {
 	constructor(props) {

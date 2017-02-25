@@ -9,6 +9,13 @@ let upload = multer();
 let port = 9000;
 
 
+/**
+ * 200: OK
+ * 500: Internal Server Error
+ */
+
+
+
 let MongoClient = require('mongodb').MongoClient;
 let assert = require('assert');
 
@@ -22,45 +29,64 @@ let jwt = require('jsonwebtoken');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
-let server = app.listen(process.env.PORT || port, function() {
+let server = app.listen(process.env.PORT || port, () => {
 	let port = server.address().port;
 	console.log(`App listening on port ${port}`);
 })
 
 app.use('/', express.static(path.resolve('./dist')));
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
 	res.sendFile(path.resolve('./dist/index.html'));
 })
 
-app.get('/signup', function(req, res) {
+app.get('/signup', (req, res) => {
 	res.sendFile(path.resolve('./dist/signup.html'));
 })
 
-app.get('/entrance', function(req, res) {
-	res.sendFile(path.resolve('./dist/login.html'));
+app.get('/entrance', (req, res) => {
+	res.sendFile(path.resolve('./dist/entrance.html'));
 })
 
-app.get('/room', function(req, res) {
+app.get('/room', (req, res) => {
 	res.sendFile(path.resolve('./dist/room.html'));
 })
 
-app.get('/gameplay', function(req, res) {
+app.get('/gameplay', (req, res) => {
 	res.sendFile(path.resolve('./dist/gameplay.html'));
 })
 
 
 
+app.post('/login', upload.array(), (req, res) => {
+	let username = req.body.username;
+	let password = req.body.password;
 
-app.post('/signup', upload.array(), function(req, res) {
-	console.log(req.body);
-	
+	console.log({username, password });
+
+	Conn.then(db => {
+		let Users = db.collection('users');
+
+		Users.findOne({ username }).then(result => {
+			if (result.password !== password) {
+				res.status(200).json({
+					code: 1,
+					err: "PASSWORD_INCORRECT"
+				})
+			} else {
+				res.sendStatus(200);
+			}
+		})
+	})
+})
+
+app.post('/signup', upload.array(), (req, res) => {
 	let username = req.body.username;
 	let password = req.body.password;
 
 	console.log({username, password});
 
-	Conn.then((db) => {
+	Conn.then(db => {
 		let Users = db.collection('users');
 		
 		Users.insertOne({ username, password }).then(() => {
@@ -68,9 +94,15 @@ app.post('/signup', upload.array(), function(req, res) {
 		})
 		.catch(err => {
 			console.log(err);
+			
+			res.status(200).json({
+				err: "USERNAME_ALREADY_EXISTS"
+			})
 		});
 	})
 	.catch((err) => {
 		console.log(err);
+
+		res.sendStatus(500);
 	})
 })

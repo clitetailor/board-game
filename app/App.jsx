@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { LargeInput, LargeButton } from './components';
 import * as $ from 'jquery';
 import './App.styl';
 import './index.styl';
 import './index.html';
 
 import './assets/chess.jpg';
-
-import { LargeInput, LargeButton } from './components';
 
 
 class App extends Component {
@@ -25,11 +24,20 @@ class App extends Component {
 
 					<div className="login-form">
 						<form action="#">
-							<LargeInput label="username" name="username" type="input" ref={(input) => { this.usernameInput = input }}></LargeInput>
-							<LargeInput label="password" name="password" type="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
+							<LargeInput
+								label="username" name="username"
+								type="input"
+								ref={(input) => { this.usernameInput = input }}
+							/>
+							<LargeInput
+								label="password" name="password"
+								type="password" ref={(input) => { this.passwordInput = input }}
+							/>
 							
 							<div className="button-group">
-								<LargeButton onClick={() => { this.login(); }}>Login</LargeButton>
+								<LargeButton onClick={() => { this.login(); }}>
+									Login
+								</LargeButton>
 								<a href="./signup">
 									<LargeButton>Sign Up</LargeButton>
 								</a>
@@ -46,8 +54,6 @@ class App extends Component {
 	}
 
 	login() {
-		testService.doSomething();
-
 		let data = {
 			username: this.usernameInput.value,
 			password: this.passwordInput.value
@@ -61,7 +67,7 @@ class App extends Component {
 		})
 
 		request.done(data => {
-			console.log(data);
+			location.href = "/entrance";
 		})
 
 		request.fail(err => {

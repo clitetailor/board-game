@@ -1,11 +1,10 @@
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import { LargeInput, LargeButton } from './components';
 import './assets/favicon.ico';
 import './index.styl';
-import './index.html';
-
-import React, { Component } from 'react';
+import './entrance.html';
 import './Entrance.styl';
-
-import { LargeButton, LargeInput } from './components';
 
 class Entrance extends Component {
 	constructor(props) {
@@ -18,7 +17,9 @@ class Entrance extends Component {
 				
 				<nav className="navbar">
 					<div className="brand">
-						<div className="brand-typo">Chess.io</div>
+						<div className="brand-typo">
+							Chess.io
+						</div>
 					</div>
 				</nav>
 
@@ -40,6 +41,7 @@ class Entrance extends Component {
 								<div className="card create-a-new-room">
 									{/*TODO: Create a new room*/}
 								</div>
+
 								<div className="card dashboard">
 									{/*TODO: Dashboard*/}
 								</div>
@@ -54,4 +56,7 @@ class Entrance extends Component {
 	}
 }
 
-export default Entrance;
+ReactDOM.render(
+	<Entrance />,
+	document.getElementById('root')
+)
