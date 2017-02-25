@@ -3,7 +3,11 @@ const path = require('path')
 
 module.exports = {
 	entry: {
-		main: './index.jsx',
+		index: './App.jsx',
+		gameplay: './GamePlay.jsx',
+		room: './Room.jsx',
+		entrance: './Entrance.jsx',
+		signup: './SignUp.jsx',
 		vendor: [
 			'jquery',
 			'react',

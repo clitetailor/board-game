@@ -1,3 +1,7 @@
+import './assets/favicon.ico';
+import './index.styl';
+import './room.html';
+
 import React, { Component } from 'react';
 import './Room.styl';
 

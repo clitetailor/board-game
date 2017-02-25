@@ -1,3 +1,8 @@
+import ReactDOM from 'react-dom';
+import './assets/favicon.ico';
+import './index.styl';
+import './signup.html';
+
 import React, { Component } from 'react';
 import './SignUp.styl';
 
@@ -60,4 +65,7 @@ class SignUp extends Component {
 	}
 }
 
-export default SignUp;
+ReactDOM.render(
+	<SignUp />,
+	document.getElementById('root')
+)

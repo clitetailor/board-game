@@ -1,3 +1,7 @@
+import './assets/favicon.ico';
+import './index.styl';
+import './login.html';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 

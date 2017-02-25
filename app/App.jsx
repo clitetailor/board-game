@@ -1,36 +1,81 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, hashHistory, browserHistory, createMemoryHistory, Redirect } from 'react-router';
-import { Provider } from 'react-redux';
-
-import Home from './Home';
-import Entrance from './Entrance';
-import Room from './Room';
-import Login from './Login';
-import NoMatch from './NoMatch';
-import SignUp from './SignUp';
-import { store } from './reducer';
-
+import ReactDOM from 'react-dom';
+import * as $ from 'jquery';
 import './App.styl';
+import './index.styl';
+import './index.html';
+
+import './assets/chess.jpg';
+
+import { LargeInput, LargeButton } from './components';
+
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Provider store={ store }>
+	constructor(props) {
+		super(props);
+	}
 
-          <Router history={ browserHistory }>
-            <Route path="/" component={ Entrance }></Route>
-            <Route path="/signup" component={ SignUp }></Route>
-            <Route path="/login" component={ Login }></Route>
-            <Route path="/entrance" component={ Entrance }></Route>
-            <Route path="/room/:id" component={ Room }></Route>
-            <Route path="*" component={ NoMatch }></Route>
-          </Router>
+	render() {
+		return (
+			<div className="App">
+				<div className="outer-wrapper">
+					<nav className="nav-bar">
+						<div className="brand-icon">Chess.io</div>
+					</nav>
 
-        </Provider>
-      </div>
-    );
-  }
+					<div className="login-form">
+						<form action="#" className="login-form">
+							<LargeInput label="username" type="input" ref={(input) => { this.usernameInput = input }}></LargeInput>
+							<LargeInput label="password" type="password" ref={(input) => { this.passwordInput = input }}></LargeInput>
+							<div className="button-group">
+								<LargeButton onClick={() => { this.login(); }}>Login</LargeButton>
+								<nav>
+									<a href="./signup">
+										<LargeButton>Sign Up</LargeButton>
+									</a>
+								</nav>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div className="background">
+					<img src="./assets/chess.jpg" alt="chess" className="background-image"/>
+				</div>
+			</div>
+		)
+	}
+
+	login() {
+		testService.doSomething();
+
+		let data = {
+			username: this.usernameInput.value,
+			password: this.passwordInput.value
+		}
+
+		let request = $.ajax({
+			type: 'POST',
+			url: '/login',
+			data: JSON.stringify(data),
+			contentType: 'application/json; charset=utf-8'
+		})
+
+		request.done(data => {
+			console.log(data);
+		})
+
+		request.fail(err => {
+
+		})
+	}
+
+	signUp() {
+
+	}
 }
 
-export default App;
+ReactDOM.render(
+	<App />,
+	document.getElementById('root')
+);
