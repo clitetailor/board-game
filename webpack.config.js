@@ -11,9 +11,7 @@ module.exports = {
 		vendor: [
 			'jquery',
 			'react',
-			'react-redux',
 			'react-dom',
-			'react-router',
 		]
 	},
 

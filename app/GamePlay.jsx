@@ -12,17 +12,17 @@ class GamePlay extends Component {
 	render() {
 		return (
 			<div className="GamePlay">
-				<div className="bg-main-game">
+				<div className="main-game">
 					<div>
 						{/*TODO: Gameboard*/}
 					</div>
 				</div>
 
-				<div className="bg-chat-box">
+				<div className="chat-box">
 					{/*TODO: Chat box component*/}
 				</div>
 
-				<div className="bg-action">
+				<div className="action">
 					
 				</div>
 			</div>

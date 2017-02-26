@@ -23,7 +23,7 @@ class App extends Component {
 					</nav>
 
 					<div className="login-form">
-						<form action="#">
+						<form action method="POST" onSubmit={() => { this.login() }}>
 							<LargeInput
 								label="username" name="username"
 								type="input"
@@ -35,7 +35,7 @@ class App extends Component {
 							/>
 							
 							<div className="button-group">
-								<LargeButton onClick={() => { this.login(); }}>
+								<LargeButton type="submit">
 									Login
 								</LargeButton>
 								<a href="./signup">

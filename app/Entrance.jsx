@@ -27,13 +27,19 @@ class Entrance extends Component {
 					<div className="content">
 						
 						<div className="top-control">
+							<LargeInput
+								type="input" name="search-box"
+								label="search"
+							/>
 							<LargeButton>NEW</LargeButton>
 						</div>
 						
 						<div className="pallete">
 							<div className="rooms">
 								<div className="card room">
-									
+									<div className="room-title">
+
+									</div>
 								</div>
 							</div>
 
