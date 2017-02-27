@@ -9,6 +9,13 @@ import './Entrance.styl';
 class Entrance extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			rooms: [{
+				id: 1024323,
+				name: "Something to eat"
+			}]
+		}
 	}
 
 	render() {
@@ -36,18 +43,23 @@ class Entrance extends Component {
 						
 						<div className="pallete">
 							<div className="rooms">
-								<div className="card room">
-									<div className="room-title">
-
-									</div>
-								</div>
+								{ this.state.rooms.map((room) => {
+									return (
+										<div className="card room" key={room.id}>
+											<div className="banner">
+												<div className="room-id">
+													<h3><i>#{ room.id }</i></h3>
+												</div>
+												<div className="room-title">
+													<h3>{ room.name }</h3>
+												</div>
+											</div>
+										</div>
+									)
+								}) }
 							</div>
 
 							<div className="info">
-								<div className="card create-a-new-room">
-									{/*TODO: Create a new room*/}
-								</div>
-
 								<div className="card dashboard">
 									{/*TODO: Dashboard*/}
 								</div>
