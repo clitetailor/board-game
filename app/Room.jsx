@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { LargeButton } from './components';
+import { NavBar } from './NavBar';
 import './assets/favicon.ico';
 import "./Room.styl";
 import './room.html'
@@ -12,6 +14,8 @@ class Room extends Component {
 	render() {
 		return (
 			<div className="Room">
+				<NavBar />
+				
 				<nav className="bg-navbar">
 					{/*TODO: Login icon component*/}
 				</nav>

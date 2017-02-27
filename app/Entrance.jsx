@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { LargeInput, LargeButton } from './components';
+import { NavBar } from './NavBar';
 import './assets/favicon.ico';
 import './index.styl';
 import './entrance.html';
@@ -14,6 +15,48 @@ class Entrance extends Component {
 			rooms: [{
 				id: 1024323,
 				name: "Something to eat"
+			}, {
+				id: 1024321,
+				name: "Something to eat"
+			}, {
+				id: 1024322,
+				name: "Something to eat"
+			}, {
+				id: 1024325,
+				name: "Something to eat"
+			}, {
+				id: 1024326,
+				name: "Something to eat"
+			}, {
+				id: 1024327,
+				name: "Something to eat"
+			}, {
+				id: 1024328,
+				name: "Something to eat"
+			}, {
+				id: 1024329,
+				name: "Something to eat"
+			}, {
+				id: 1024331,
+				name: "Something to eat"
+			}, {
+				id: 1024332,
+				name: "Something to eat"
+			}, {
+				id: 1024333,
+				name: "Something to eat"
+			}, {
+				id: 1024334,
+				name: "Something to eat"
+			}, {
+				id: 1024335,
+				name: "Something to eat"
+			}, {
+				id: 1024336,
+				name: "Something to eat"
+			}, {
+				id: 1024337,
+				name: "Something to eat"
 			}]
 		}
 	}
@@ -21,24 +64,19 @@ class Entrance extends Component {
 	render() {
 		return (
 			<div className="Entrance">
-				
-				<nav className="navbar">
-					<div className="brand">
-						<div className="brand-typo">
-							Chess.io
-						</div>
-					</div>
-				</nav>
+				<NavBar />
 
 				<div className="outer-wrapper">
 					<div className="content">
 						
 						<div className="top-control">
-							<LargeInput
-								type="input" name="search-box"
-								label="search"
-							/>
-							<LargeButton>NEW</LargeButton>
+							<div className="card">
+								<LargeInput
+									type="input" name="search-box"
+									label="search"
+								/>
+								<LargeButton>SEARCH</LargeButton>
+							</div>
 						</div>
 						
 						<div className="pallete">
@@ -54,12 +92,18 @@ class Entrance extends Component {
 													<h3>{ room.name }</h3>
 												</div>
 											</div>
+											<div className="action">
+												<LargeButton>JOIN</LargeButton>
+											</div>
 										</div>
 									)
 								}) }
 							</div>
 
 							<div className="info">
+								<div className="card new-room">
+									<LargeButton>NEW</LargeButton>
+								</div>
 								<div className="card dashboard">
 									{/*TODO: Dashboard*/}
 								</div>
