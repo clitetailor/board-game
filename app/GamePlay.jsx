@@ -23,7 +23,7 @@ class GamePlay extends Component {
 				</div>
 
 				<div className="action">
-					
+
 				</div>
 			</div>
 		)

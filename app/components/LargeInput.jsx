@@ -24,20 +24,23 @@ export class LargeInput extends Component {
 			<div
 				className="LargeInput"
 				ref={(wrapper) => { this.wrapper = wrapper }}
-				onClick={() => { this.onClick() }}>
-					<label
-						className={ toClassName({ invisible: this.state.labelInvisible }) }
-						htmlFor={ this.props.name }
-						ref={ (label) => { this.label = label } }>
-							{this.props.label}
-					</label>
-					<input
-						ref={(input) => { this.textInput=input }}
-						onChange={() => { this.inputCheck() }}
-						onBlur={() => { this.onBlur() }}
-						onFocus={() => { this.onFocus() }}
-						name={ this.props.name }
-						{...removeKeys(this.props, ['label'])}/>
+				onClick={() => { this.onClick() }}
+			>
+				<label
+					className={toClassName({ invisible: this.state.labelInvisible })}
+					htmlFor={this.props.name}
+					ref={(label) => { this.label = label }}
+				>
+					{this.props.label}
+				</label>
+				<input
+					ref={(input) => { this.textInput = input }}
+					onChange={() => { this.inputCheck() }}
+					onBlur={() => { this.onBlur() }}
+					onFocus={() => { this.onFocus() }}
+					name={this.props.name}
+					{...removeKeys(this.props, ['label']) }
+				/>
 			</div>
 		)
 	}

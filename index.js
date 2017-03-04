@@ -62,7 +62,7 @@ app.post('/login', upload.array(), (req, res) => {
 	let username = req.body.username;
 	let password = req.body.password;
 
-	console.log({username, password });
+	console.log({ username, password });
 
 	Conn.then(db => {
 		let Users = db.collection('users');
@@ -84,25 +84,25 @@ app.post('/signup', upload.array(), (req, res) => {
 	let username = req.body.username;
 	let password = req.body.password;
 
-	console.log({username, password});
+	console.log({ username, password });
 
 	Conn.then(db => {
 		let Users = db.collection('users');
-		
+
 		Users.insertOne({ username, password }).then(() => {
 			res.sendStatus(200);
 		})
-		.catch(err => {
-			console.log(err);
-			
-			res.status(200).json({
-				err: "USERNAME_ALREADY_EXISTS"
-			})
-		});
-	})
-	.catch((err) => {
-		console.log(err);
+			.catch(err => {
+				console.log(err);
 
-		res.sendStatus(500);
+				res.status(200).json({
+					err: "USERNAME_ALREADY_EXISTS"
+				})
+			});
 	})
+		.catch((err) => {
+			console.log(err);
+
+			res.sendStatus(500);
+		})
 })

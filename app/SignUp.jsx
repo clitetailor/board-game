@@ -65,16 +65,16 @@ class SignUp extends Component {
 				data: JSON.stringify(data),
 				contentType: 'application/json; charset=utf-8'
 			})
-			.then((data) => {
-				if (data.err) {
-					console.log(data.err);
-				} else {
-					location.href = "/"
-				}
-			})
-			.catch((err) => {
-				console.log(err);
-			})
+				.then((data) => {
+					if (data.err) {
+						console.log(data.err);
+					} else {
+						location.href = "/"
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				})
 		}
 	}
 }

@@ -68,7 +68,7 @@ class Entrance extends Component {
 
 				<div className="outer-wrapper">
 					<div className="content">
-						
+
 						<div className="top-control">
 							<div className="card">
 								<LargeInput
@@ -78,18 +78,18 @@ class Entrance extends Component {
 								<LargeButton>SEARCH</LargeButton>
 							</div>
 						</div>
-						
+
 						<div className="pallete">
 							<div className="rooms">
-								{ this.state.rooms.map((room) => {
+								{this.state.rooms.map((room) => {
 									return (
 										<div className="card room" key={room.id}>
 											<div className="banner">
 												<div className="room-id">
-													<h3><i>#{ room.id }</i></h3>
+													<h3><i>#{room.id}</i></h3>
 												</div>
 												<div className="room-title">
-													<h3>{ room.name }</h3>
+													<h3>{room.name}</h3>
 												</div>
 											</div>
 											<div className="action">
@@ -97,7 +97,7 @@ class Entrance extends Component {
 											</div>
 										</div>
 									)
-								}) }
+								})}
 							</div>
 
 							<div className="info">

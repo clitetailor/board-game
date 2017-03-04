@@ -33,7 +33,7 @@ class App extends Component {
 								label="password" name="password"
 								type="password" ref={(input) => { this.passwordInput = input }}
 							/>
-							
+
 							<div className="button-group">
 								<LargeButton type="submit">
 									Login
@@ -47,7 +47,7 @@ class App extends Component {
 				</div>
 
 				<div className="background">
-					<img src="./assets/chess.jpg" alt="chess" className="background-image"/>
+					<img src="./assets/chess.jpg" alt="chess" className="background-image" />
 				</div>
 			</div>
 		)

@@ -15,7 +15,7 @@ class Room extends Component {
 		return (
 			<div className="Room">
 				<NavBar />
-				
+
 				<nav className="bg-navbar">
 					{/*TODO: Login icon component*/}
 				</nav>
