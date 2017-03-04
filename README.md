@@ -1,6 +1,11 @@
 Board game
 ==========
 
+Prerequisites
+-------------
+
+- MongoDB Driver
+
 Setup
 -----
 
