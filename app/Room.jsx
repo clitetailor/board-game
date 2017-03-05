@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { LargeButton } from './components';
+import { LargeButton } from './cmp';
 import { NavBar } from './NavBar';
 import './assets/favicon.ico';
 import "./Room.styl";

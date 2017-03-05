@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { LargeInput, LargeButton } from './components';
-import { NavBar } from './NavBar';
-import './assets/favicon.ico';
-import './index.styl';
-import './entrance.html';
-import './Entrance.styl';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import { LargeInput, LargeButton } from './cmp'
+import { NavBar } from './NavBar'
+import './assets/favicon.ico'
+import './index.styl'
+import './entrance.html'
+import './Entrance.styl'
 
 class Entrance extends Component {
 	constructor(props) {

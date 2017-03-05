@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { LargeInput, LargeButton } from './components';
-import * as $ from 'jquery';
-import './App.styl';
-import './index.styl';
-import './index.html';
-
-import './assets/chess.jpg';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import { LargeInput, LargeButton } from './cmp'
+import * as $ from 'jquery'
+import './App.styl'
+import './index.styl'
+import './index.html'
+import './assets/chess.jpg'
 
 
 class App extends Component {

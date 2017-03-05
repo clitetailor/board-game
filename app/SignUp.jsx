@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
-import { LargeInput, LargeButton } from './components';
+import { LargeInput, LargeButton } from './cmp';
 import * as $ from 'jquery';
 import './assets/favicon.ico';
 import './index.styl';
