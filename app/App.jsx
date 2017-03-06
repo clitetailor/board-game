@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { LargeInput, LargeButton } from './cmp'
 import * as $ from 'jquery'
+import './assets/chess.jpg'
+import './App.html'
 import './App.styl'
 import './index.styl'
-import './index.html'
-import './assets/chess.jpg'
 
 
 class App extends Component {
@@ -17,7 +17,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<div className="outer-wrapper">
-					<nav className="nav-bar">
+					<nav className="navbar">
 						<div className="brand-icon">Chess.io</div>
 					</nav>
 
@@ -46,7 +46,10 @@ class App extends Component {
 				</div>
 
 				<div className="background">
-					<img src="./assets/chess.jpg" alt="chess" className="background-image" />
+					<img
+						src="./assets/chess.jpg" alt="chess"
+						className="background-image"
+					/>
 				</div>
 			</div>
 		)

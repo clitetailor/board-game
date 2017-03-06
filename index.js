@@ -41,19 +41,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('/signup', (req, res) => {
-	res.sendFile(path.resolve('./dist/signup.html'));
+	res.sendFile(path.resolve('./dist/SignUp.html'));
 })
 
 app.get('/entrance', (req, res) => {
-	res.sendFile(path.resolve('./dist/entrance.html'));
+	res.sendFile(path.resolve('./dist/Entrance.html'));
 })
 
 app.get('/room', (req, res) => {
-	res.sendFile(path.resolve('./dist/room.html'));
+	res.sendFile(path.resolve('./dist/Room.html'));
 })
 
 app.get('/gameplay', (req, res) => {
-	res.sendFile(path.resolve('./dist/gameplay.html'));
+	res.sendFile(path.resolve('./dist/GamePlay.html'));
 })
 
 

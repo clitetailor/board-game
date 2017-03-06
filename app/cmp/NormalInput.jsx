@@ -1,25 +1,13 @@
 import React, { Component } from 'react';
+import { toClassName, removeKeys } from 'utils/className';
 import './NormalInput.styl';
 
-import toClassName from 'utils/className';
-
-const defaultProps = {
-	type: 'input'
-}
-
-function removeKeys(props, keys) {
-	let newProps = Object.assign({}, props);
-
-	for (let key in keys) {
-		newProps[key] = undefined;
-	}
-
-	return newProps;
-}
-
-
-export class NormalInput extends Component {
-	constructor(props = defaultProps) {
+class NormalInput extends Component {
+	/**
+	 * 
+	 * @param {{ label, input, type }} props 
+	 */
+	constructor(props) {
 		super(props);
 
 		this.state = {
@@ -35,7 +23,9 @@ export class NormalInput extends Component {
 				onClick={() => { this.onClick() }}
 			>
 				<label
-					className={toClassName({ invisible: this.state.labelInvisible })}
+					className={toClassName({
+						invisible: this.state.labelInvisible
+					})}
 					htmlFor={this.props.label}
 					ref={(label) => { this.label = label }}
 				>
@@ -87,3 +77,9 @@ export class NormalInput extends Component {
 		this.textInput.value = newValue;
 	}
 }
+
+NormalInput.defaultProps = {
+	type: 'input'
+}
+
+export { NormalInput }

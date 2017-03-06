@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { LargeInput, LargeButton } from './cmp'
-import { NavBar } from './NavBar'
+import { LargeInput, LargeButton, NavBar } from './cmp'
 import './assets/favicon.ico'
-import './index.styl'
-import './entrance.html'
+import './Entrance.html'
 import './Entrance.styl'
+import './index.styl'
 
 class Entrance extends Component {
 	constructor(props) {
@@ -83,15 +82,20 @@ class Entrance extends Component {
 							<div className="rooms">
 								{this.state.rooms.map((room) => {
 									return (
-										<div className="card room" key={room.id}>
+										<div
+											className="card room"
+											key={room.id}
+										>
 											<div className="banner">
 												<div className="room-id">
 													<h3><i>#{room.id}</i></h3>
 												</div>
+
 												<div className="room-title">
 													<h3>{room.name}</h3>
 												</div>
 											</div>
+
 											<div className="action">
 												<LargeButton>JOIN</LargeButton>
 											</div>
@@ -104,6 +108,7 @@ class Entrance extends Component {
 								<div className="card new-room">
 									<LargeButton>NEW</LargeButton>
 								</div>
+
 								<div className="card dashboard">
 									{/*TODO: Dashboard*/}
 								</div>

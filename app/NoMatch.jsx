@@ -1,7 +1,9 @@
-import './index.js';
-import './nomatch.html';
-
-import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
+import './assets/favicon.ico'
+import './NoMatch.html'
+import './NoMatch.html'
+import './index.styl'
 
 class NoMatch extends Component {
 	constructor(props) {

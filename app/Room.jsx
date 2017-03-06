@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { LargeButton } from './cmp';
-import { NavBar } from './NavBar';
-import './assets/favicon.ico';
-import "./Room.styl";
-import './room.html'
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import { LargeButton, NavBar } from './cmp'
+import './assets/favicon.ico'
+import './Room.styl'
+import './Room.html'
+import './index.styl'
 
 class Room extends Component {
 	constructor(props) {
@@ -16,21 +16,21 @@ class Room extends Component {
 			<div className="Room">
 				<NavBar />
 
-				<nav className="bg-navbar">
+				<nav className="navbar">
 					{/*TODO: Login icon component*/}
 				</nav>
 
-				<div className="bg-players">
+				<div className="players">
 					{/*TODO: List of players*/}
 				</div>
 
-				<div className="bg-chat-box">
+				<div className="chatbox">
 					{/*TODO: Chat box component*/}
 				</div>
 
-				<div className="bg-action">
-					<button className="bg-button">Invite</button>
-					<button className="bg-button">Ready</button>
+				<div className="action">
+					<LargeButton>Invite</LargeButton>
+					<LargeButton>Ready</LargeButton>
 				</div>
 			</div>
 		)

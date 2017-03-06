@@ -1,11 +1,11 @@
-import ReactDOM from 'react-dom';
-import React, { Component } from 'react';
-import { LargeInput, LargeButton } from './cmp';
-import * as $ from 'jquery';
-import './assets/favicon.ico';
-import './index.styl';
-import './signup.html';
-import './SignUp.styl';
+import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
+import { LargeInput, LargeButton } from './cmp'
+import * as $ from 'jquery'
+import './assets/favicon.ico'
+import './SignUp.html'
+import './SignUp.styl'
+import './index.styl'
 
 
 class SignUp extends Component {

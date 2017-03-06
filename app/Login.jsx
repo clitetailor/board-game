@@ -1,8 +1,9 @@
-import ReactDOM from 'react-dom';
-import React, { Component } from 'react';
-import './assets/favicon.ico';
-import 'index.styl';
-import 'signup.html'
+import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
+import './assets/favicon.ico'
+import './Login.html'
+import './Login.styl'
+import './index.styl'
 
 class Login extends Component {
 	constructor(props) {
