@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { toClassName, removeKeys } from 'utils/className';
-import './NormalInput.styl';
+import React, { Component } from 'react'
+import { toClassName, removeKeys } from 'utils/className'
+import style from './NormalInput.styl'
 
 class NormalInput extends Component {
 	/**
@@ -18,7 +18,7 @@ class NormalInput extends Component {
 	render() {
 		return (
 			<div
-				className="LargeInput"
+				className={style.NormalInput}
 				ref={(wrapper) => { this.wrapper = wrapper }}
 				onClick={() => { this.onClick() }}
 			>

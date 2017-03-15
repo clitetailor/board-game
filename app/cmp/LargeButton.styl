@@ -1,6 +1,6 @@
 @import "../styles.styl";
 
-.LargeButton
+:local .LargeButton :global
 	border none
 	outline none
 
@@ -17,5 +17,5 @@
 	box-shadow $box-shadow-primary
 	transition all 0.1s
 
-	&:active
+	& :active
 		box-shadow $box-shadow-raised

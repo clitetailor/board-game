@@ -4,9 +4,7 @@ import { LargeInput, LargeButton } from './cmp'
 import * as $ from 'jquery'
 import './assets/chess.jpg'
 import './App.html'
-import './App.styl'
-import './index.styl'
-
+import style from './App.styl'
 
 class App extends Component {
 	constructor(props) {
@@ -15,20 +13,22 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App">
+			<div className={style.App}>
 				<div className="outer-wrapper">
 					<nav className="navbar">
 						<div className="brand-icon">Chess.io</div>
 					</nav>
 
 					<div className="login-form">
-						<form action method="POST" onSubmit={() => { this.login() }}>
+						<form action="" method="POST" onSubmit={(e) => { this.login(e) }}>
 							<LargeInput
+								className="large-input"	
 								label="username" name="username"
 								type="input"
 								ref={(input) => { this.usernameInput = input }}
 							/>
 							<LargeInput
+								className="large-input"	
 								label="password" name="password"
 								type="password" ref={(input) => { this.passwordInput = input }}
 							/>
@@ -55,7 +55,9 @@ class App extends Component {
 		)
 	}
 
-	login() {
+	login(e) {
+		e.preventDefault();
+
 		let data = {
 			username: this.usernameInput.value,
 			password: this.passwordInput.value

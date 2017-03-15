@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import './LargeInput.styl';
+import React, { Component } from 'react'
+import style from './LargeInput.styl'
 
-import { removeKeys, toClassName } from 'utils/className';
+import { removeKeys, toClassName, filterKeys } from '../utils/className';
 
 const defaultProps = {
 	type: 'input'
@@ -22,7 +22,7 @@ export class LargeInput extends Component {
 	render() {
 		return (
 			<div
-				className="LargeInput"
+				className={[style.LargeInput, this.props.className].join(' ')}
 				ref={(wrapper) => { this.wrapper = wrapper }}
 				onClick={() => { this.onClick() }}
 			>
@@ -39,7 +39,7 @@ export class LargeInput extends Component {
 					onBlur={() => { this.onBlur() }}
 					onFocus={() => { this.onFocus() }}
 					name={this.props.name}
-					{...removeKeys(this.props, ['label']) }
+					{...removeKeys(this.props, ['label', 'className', 'style']) }
 				/>
 			</div>
 		)

@@ -33,6 +33,8 @@ Folder Structure
 	+ App.html
 	+ App.styl
 
+- data				<- mongodb
+
 + index.js			<- server
 
 + .gitignore

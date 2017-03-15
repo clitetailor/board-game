@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import './assets/favicon.ico'
 import './GamePlay.html'
-import './GamePlay.styl'
-import './index.styl'
+import style from './GamePlay.styl'
 
 class GamePlay extends Component {
 	constructor(props) {
@@ -12,7 +11,7 @@ class GamePlay extends Component {
 
 	render() {
 		return (
-			<div className="GamePlay">
+			<div className={style.GamePlay}>
 				<div className="main-game">
 					<div>
 						{/*TODO: Gameboard*/}

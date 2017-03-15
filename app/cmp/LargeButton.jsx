@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './LargeButton.styl';
+import React, { Component } from 'react'
+import style from './LargeButton.styl'
 
 export class LargeButton extends Component {
 	constructor(props) {
@@ -8,7 +8,11 @@ export class LargeButton extends Component {
 
 	render() {
 		return (
-			<button className="LargeButton" type="button" {...this.props}></button>
+			<button
+				className={style.LargeButton}
+				type="button"
+				{...this.props}
+			/>
 		)
 	}
 }

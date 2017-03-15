@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom'
 import { LargeInput, LargeButton, NavBar } from './cmp'
 import './assets/favicon.ico'
 import './Entrance.html'
-import './Entrance.styl'
-import './index.styl'
+import style from './Entrance.styl'
 
 class Entrance extends Component {
 	constructor(props) {
@@ -62,7 +61,7 @@ class Entrance extends Component {
 
 	render() {
 		return (
-			<div className="Entrance">
+			<div className={style.Entrance}>
 				<NavBar />
 
 				<div className="outer-wrapper">

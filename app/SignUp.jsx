@@ -4,9 +4,7 @@ import { LargeInput, LargeButton } from './cmp'
 import * as $ from 'jquery'
 import './assets/favicon.ico'
 import './SignUp.html'
-import './SignUp.styl'
-import './index.styl'
-
+import style from './SignUp.styl'
 
 class SignUp extends Component {
 	constructor(props) {
@@ -15,7 +13,7 @@ class SignUp extends Component {
 
 	render() {
 		return (
-			<div className="SignUp">
+			<div className={style.SignUp}>
 				<nav className="navbar">
 					<div className="brand">
 						<div className="brand-typo">Chess.io</div>
@@ -26,14 +24,17 @@ class SignUp extends Component {
 					<div className="signup-form">
 						<form>
 							<LargeInput
+								className="large-input"
 								type='input' label='username'
 								ref={(input) => { this.usernameInput = input }}
 							/>
 							<LargeInput
+								className="large-input"
 								type="password" label="password"
 								ref={(input) => { this.passwordInput = input }}
 							/>
 							<LargeInput
+								className="large-input"
 								type="password" label="confirm password"
 								ref={(input) => { this.confirmPasswordInput = input }}
 							/>

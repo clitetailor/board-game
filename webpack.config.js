@@ -1,9 +1,10 @@
 const webpack = require('webpack')
 const path = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
 	entry: {
-		index: './App.jsx',
+		app: './App.jsx',
 		gameplay: './GamePlay.jsx',
 		room: './Room.jsx',
 		entrance: './Entrance.jsx',
@@ -25,7 +26,7 @@ module.exports = {
 
 	output: {
 		path: path.resolve("./dist"),
-		filename: "[name].js",
+		filename: "js/[name].js",
 	},
 
 	devtool: "source-map",
@@ -50,27 +51,30 @@ module.exports = {
 			}]
 		}, {
 			test: /\.styl?$/,
-			use: [
-				'style-loader',
-				'css-loader',
-				'stylus-loader'
-			],
+			use: ExtractTextPlugin.extract({
+				fallback: "style-loader",
+				use: ["css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]", "stylus-loader"]
+			})
 		}, {
-			test: /\.css?$/,
-			use: [
-				'style-loader',
-				'css-loader'
-			]
+			test: /\.css$/,
+			use: ExtractTextPlugin.extract({
+				fallback: "style-loader",
+				use: "css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]"
+			})
 		}, {
 			test: /\.(png|jpg|jpeg|svg|ico)$/,
-			use: [
-				'file-loader?name=assets/[name].[ext]'
-			]
+			loader: 'file-loader',
+			query: {
+				name: 'assets/[hash].[ext]',
+				publicPath: '/'
+			}
 		}, {
 			test: /\.(woff2?|ttf|eot)$/,
-			use: [
-				'url-loader?limit=10000'
-			]
+			loader: 'file-loader',
+			query: {
+				name: 'assets/[hash].[ext]',
+				publicPath: '/'
+			}
 		}],
 	},
 
@@ -89,12 +93,22 @@ module.exports = {
 
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin({
-			name: 'vendor'
+			name: 'vendor',
+			minChunks: (module) => {
+				return module.context && module.context.indexOf("node_modules") !== -1;
+			}
+		}),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: "manifest",
+			minChunks: Infinity
 		}),
 		new webpack.ProvidePlugin({
 			jQuery: 'jquery',
 			$: 'jquery',
 			jquery: 'jquery'
+		}),
+		new ExtractTextPlugin({
+			filename: 'css/[name].css'
 		})
 	]
 }

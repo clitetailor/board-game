@@ -1,12 +1,17 @@
-let express = require('express');
-let app = express();
-let path = require('path');
+let express = require('express'),
+	app = express(),
+	path = require('path'),
+	cors = require('cors'),
+	jwt = require('jsonwebtoken');
 
-let bodyParser = require('body-parser');
-let multer = require('multer');
-let upload = multer();
+let MongoClient = require('mongodb').MongoClient,
+	url = 'mongodb://localhost:27017/myproject',
+	Conn = MongoClient.connect(url);
 
-let port = 9000;
+let bodyParser = require('body-parser'),
+	multer = require('multer'),
+	upload = multer(),
+	port = 9000;
 
 
 /**
@@ -16,28 +21,22 @@ let port = 9000;
 
 
 
-let MongoClient = require('mongodb').MongoClient;
-let assert = require('assert');
-
-let url = 'mongodb://localhost:27017/myproject';
-
-let Conn = MongoClient.connect(url);
-
-let jwt = require('jsonwebtoken');
-
-
-app.use(bodyParser.json());
+app.use(cors())
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use('/js', express.static(path.resolve('./dist/js')))
+app.use('/assets', express.static(path.resolve('./dist/assets')))
+app.use('/css', express.static(path.resolve('./dist/css')))
+
+
 
 let server = app.listen(process.env.PORT || port, () => {
 	let port = server.address().port;
 	console.log(`App listening on port ${port}`);
 })
 
-app.use('/', express.static(path.resolve('./dist')));
-
 app.get('/', (req, res) => {
-	res.sendFile(path.resolve('./dist/index.html'));
+	res.sendFile(path.resolve('./dist/App.html'));
 })
 
 app.get('/signup', (req, res) => {
@@ -58,6 +57,8 @@ app.get('/gameplay', (req, res) => {
 
 
 
+
+
 app.post('/login', upload.array(), (req, res) => {
 	let username = req.body.username;
 	let password = req.body.password;
@@ -71,7 +72,8 @@ app.post('/login', upload.array(), (req, res) => {
 			if (result.password !== password) {
 				res.status(200).json({
 					code: 1,
-					err: "PASSWORD_INCORRECT"
+					err: "PASSWORD_INCORRECT",
+					token: jwt
 				})
 			} else {
 				res.sendStatus(200);
@@ -79,6 +81,8 @@ app.post('/login', upload.array(), (req, res) => {
 		})
 	})
 })
+
+
 
 app.post('/signup', upload.array(), (req, res) => {
 	let username = req.body.username;

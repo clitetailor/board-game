@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import './NavBar.styl';
+import React, { Component } from 'react'
+import style from './NavBar.styl'
 
 export class NavBar extends Component {
     render() {
         return (
-            <nav className="NavBar">
+			<nav className={style.NavBar}>
                 <div className="brand">
                     <div className="brand-typo">
                         Chess.io

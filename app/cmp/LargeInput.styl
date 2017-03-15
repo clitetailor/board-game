@@ -3,7 +3,7 @@
 $input-height = 48px
 $input-width = 500px
 
-.LargeInput
+:local .LargeInput :global
 	position relative
 
 	background white
@@ -19,7 +19,7 @@ $input-width = 500px
 		{vendor}-cursor text
 		{vendor}-user-select none
 
-	> input, > label
+	input, label
 		position absolute
 		top 8px
 		bottom 8px
@@ -29,7 +29,7 @@ $input-width = 500px
 		font-family Lato
 		font-size 20px
 
-	> label
+	label
 		color $font-light
 		background transparent
 		font-weight normal
@@ -38,10 +38,10 @@ $input-width = 500px
 		&.invisible
 			color transparent
 		
-		^[0].focus label
-			color transparent
+	& .focus label
+		color transparent
 
-	> input
+	input
 		width $input-width - 60px
 		background transparent
 		

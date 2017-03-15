@@ -2,8 +2,7 @@ import ReactDOM from 'react-dom'
 import React, { Component } from 'react'
 import './assets/favicon.ico'
 import './Login.html'
-import './Login.styl'
-import './index.styl'
+import style from './Login.styl'
 
 class Login extends Component {
 	constructor(props) {
@@ -12,8 +11,8 @@ class Login extends Component {
 
 	render() {
 		return (
-			<div className="Login">
-
+			<div className={style.Login}>
+				
 			</div>
 		)
 	}
