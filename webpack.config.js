@@ -4,15 +4,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
 	entry: {
-		app: './App.jsx',
-		gameplay: './GamePlay.jsx',
-		room: './Room.jsx',
-		entrance: './Entrance.jsx',
-		signup: './SignUp.jsx',
+		index: 'index.jsx',
 		vendor: [
 			'jquery',
 			'react',
-			'react-dom',
+			'react-router-dom',
+			'history/createBrowserHistory'
 		]
 	},
 
@@ -39,7 +36,7 @@ module.exports = {
 				path.resolve(__dirname, "app")
 			],
 
-			use: "babel-loader"
+			use: ["babel-loader", path.resolve("webpack/react-css-modules-loader")]
 		}, {
 			test: /\.html?$/,
 
@@ -53,13 +50,33 @@ module.exports = {
 			test: /\.styl?$/,
 			use: ExtractTextPlugin.extract({
 				fallback: "style-loader",
-				use: ["css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]", "stylus-loader"]
+				use: [{
+					loader: "css-loader",
+					query: {
+						sourceMap: true,
+						modules: true,
+						importLoaders: 1,
+						localIdentName: '[name]-[local]--[hash:base64:5]',
+						camelCase: true,
+						minimize: true
+					}
+				}, "stylus-loader"]
 			})
 		}, {
 			test: /\.css$/,
 			use: ExtractTextPlugin.extract({
 				fallback: "style-loader",
-				use: "css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]"
+				use: {
+					loader: "css-loader",
+					query: {
+						sourceMap: true,
+						modules: true,
+						importLoaders: 1,
+						localIdentName: '[name]-[local]--[hash:base64:5]',
+						camelCase: true,
+						minimize: true
+					}
+				}
 			})
 		}, {
 			test: /\.(png|jpg|jpeg|svg|ico)$/,
@@ -101,11 +118,6 @@ module.exports = {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: "manifest",
 			minChunks: Infinity
-		}),
-		new webpack.ProvidePlugin({
-			jQuery: 'jquery',
-			$: 'jquery',
-			jquery: 'jquery'
 		}),
 		new ExtractTextPlugin({
 			filename: 'css/[name].css'

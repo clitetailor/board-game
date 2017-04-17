@@ -1,19 +1,17 @@
-import ReactDOM from 'react-dom'
 import React, { Component } from 'react'
 import { LargeInput, LargeButton } from './cmp'
 import * as $ from 'jquery'
-import './assets/favicon.ico'
-import './SignUp.html'
-import style from './SignUp.styl'
+import './SignUp.styl'
 
-class SignUp extends Component {
+
+export default class SignUp extends Component {
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
 		return (
-			<div className={style.SignUp}>
+			<div className="SignUp">
 				<nav className="navbar">
 					<div className="brand">
 						<div className="brand-typo">Chess.io</div>
@@ -39,7 +37,7 @@ class SignUp extends Component {
 								ref={(input) => { this.confirmPasswordInput = input }}
 							/>
 
-							<div className="row bg-button-group">
+							<div className={["row", "bg-button-group"].map(name => style[name]).join(" ")}>
 								<LargeButton
 									onClick={() => this.submit()}
 								>
@@ -79,8 +77,3 @@ class SignUp extends Component {
 		}
 	}
 }
-
-ReactDOM.render(
-	<SignUp />,
-	document.getElementById('root')
-);

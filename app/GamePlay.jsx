@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import './assets/favicon.ico'
-import './GamePlay.html'
-import style from './GamePlay.styl'
+import styles from './GamePlay.styl'
 
-class GamePlay extends Component {
+
+export default class GamePlay extends Component {
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
 		return (
-			<div className={style.GamePlay}>
+			<div className="GamePlay">
 				<div className="main-game">
 					<div>
 						{/*TODO: Gameboard*/}
@@ -29,8 +27,3 @@ class GamePlay extends Component {
 		)
 	}
 }
-
-ReactDOM.render(
-	<GamePlay />,
-	document.getElementById('root')
-)

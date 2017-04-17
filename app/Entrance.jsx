@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import { LargeInput, LargeButton, NavBar } from './cmp'
-import './assets/favicon.ico'
-import './Entrance.html'
-import style from './Entrance.styl'
+import styles from './Entrance.styl'
 
-class Entrance extends Component {
+export default class Entrance extends Component {
 	constructor(props) {
 		super(props);
 
@@ -61,7 +58,7 @@ class Entrance extends Component {
 
 	render() {
 		return (
-			<div className={style.Entrance}>
+			<div className="Entrance">
 				<NavBar />
 
 				<div className="outer-wrapper">
@@ -82,7 +79,7 @@ class Entrance extends Component {
 								{this.state.rooms.map((room) => {
 									return (
 										<div
-											className="card room"
+											className="card"
 											key={room.id}
 										>
 											<div className="banner">
@@ -104,11 +101,11 @@ class Entrance extends Component {
 							</div>
 
 							<div className="info">
-								<div className="card new-room">
+								<div className="card">
 									<LargeButton>NEW</LargeButton>
 								</div>
 
-								<div className="card dashboard">
+								<div className="card">
 									{/*TODO: Dashboard*/}
 								</div>
 							</div>
@@ -121,8 +118,3 @@ class Entrance extends Component {
 		)
 	}
 }
-
-ReactDOM.render(
-	<Entrance />,
-	document.getElementById('root')
-)

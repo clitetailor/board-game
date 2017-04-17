@@ -24,7 +24,7 @@ class NormalInput extends Component {
 			>
 				<label
 					className={toClassName({
-						invisible: this.state.labelInvisible
+						[styles.invisible]: this.state.labelInvisible
 					})}
 					htmlFor={this.props.label}
 					ref={(label) => { this.label = label }}

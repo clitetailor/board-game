@@ -1,19 +1,38 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import { Redirect } from 'react-router-dom'
 import { LargeInput, LargeButton } from './cmp'
 import * as $ from 'jquery'
-import './assets/chess.jpg'
-import './App.html'
-import style from './App.styl'
+import image from './assets/chess.jpg'
+import styles from './App.styl'
+import history from './history'
 
-class App extends Component {
+import { store, todos } from './index'
+import { name } from 'redux-atomic-action'
+
+function addTodo(todo) {
+	return name(state => { state = Object.assign({}, state); state.todos = state.todos.concat(['something']); return state;}, "ADD_TODO");
+}
+
+export default class App extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			login: false
+		}
 	}
 
 	render() {
+		if (this.state.login) {
+			return (
+				<Redirect push to={{
+					pathname: '/entrance'
+				}}/>
+			)
+		}
+
 		return (
-			<div className={style.App}>
+			<div className="App">
 				<div className="outer-wrapper">
 					<nav className="navbar">
 						<div className="brand-icon">Chess.io</div>
@@ -40,6 +59,7 @@ class App extends Component {
 								<a href="./signup">
 									<LargeButton>Sign Up</LargeButton>
 								</a>
+								<LargeButton onClick={() => { this.addTodo() }}>Add Todo</LargeButton>
 							</div>
 						</form>
 					</div>
@@ -47,12 +67,16 @@ class App extends Component {
 
 				<div className="background">
 					<img
-						src="./assets/chess.jpg" alt="chess"
+						src={image} alt="chess"
 						className="background-image"
 					/>
 				</div>
 			</div>
 		)
+	}
+
+	addTodo() {
+		store.dispatch(addTodo('something'))
 	}
 
 	login(e) {
@@ -71,7 +95,7 @@ class App extends Component {
 		})
 
 		request.done(data => {
-			location.href = "/entrance";
+			history.push('/entrance')
 		})
 
 		request.fail(err => {
@@ -83,8 +107,3 @@ class App extends Component {
 
 	}
 }
-
-ReactDOM.render(
-	<App />,
-	document.getElementById('root')
-);

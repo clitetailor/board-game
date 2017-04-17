@@ -2,7 +2,8 @@ let express = require('express'),
 	app = express(),
 	path = require('path'),
 	cors = require('cors'),
-	jwt = require('jsonwebtoken');
+	jwt = require('jsonwebtoken'),
+	fs = require('fs');
 
 let MongoClient = require('mongodb').MongoClient,
 	url = 'mongodb://localhost:27017/myproject',
@@ -12,6 +13,9 @@ let bodyParser = require('body-parser'),
 	multer = require('multer'),
 	upload = multer(),
 	port = 9000;
+
+
+let cert = fs.readFileSync(path.resolve('./cert/alice.crt'), 'utf-8');
 
 
 /**
@@ -36,23 +40,19 @@ let server = app.listen(process.env.PORT || port, () => {
 })
 
 app.get('/', (req, res) => {
-	res.sendFile(path.resolve('./dist/App.html'));
+	res.sendFile(path.resolve('./dist/index.html'));
 })
 
 app.get('/signup', (req, res) => {
-	res.sendFile(path.resolve('./dist/SignUp.html'));
-})
-
-app.get('/entrance', (req, res) => {
-	res.sendFile(path.resolve('./dist/Entrance.html'));
+	res.sendFile(path.resolve('./dist/index.html'));
 })
 
 app.get('/room', (req, res) => {
-	res.sendFile(path.resolve('./dist/Room.html'));
+	res.sendFile(path.resolve('./dist/index.html'));
 })
 
 app.get('/gameplay', (req, res) => {
-	res.sendFile(path.resolve('./dist/GamePlay.html'));
+	res.sendFile(path.resolve('./dist/index.html'));
 })
 
 
@@ -72,11 +72,12 @@ app.post('/login', upload.array(), (req, res) => {
 			if (result.password !== password) {
 				res.status(200).json({
 					code: 1,
-					err: "PASSWORD_INCORRECT",
-					token: jwt
+					err: "PASSWORD_INCORRECT"
 				})
 			} else {
-				res.sendStatus(200);
+				res.status(200).json(jwt.sign({
+					exp: 1000 * 86400 
+				}))
 			}
 		})
 	})

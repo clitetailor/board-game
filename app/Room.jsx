@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import { LargeButton, NavBar } from './cmp'
-import './assets/favicon.ico'
-import './Room.html'
-import style from './Room.styl'
+import styles from './Room.styl'
 
-class Room extends Component {
+export default class Room extends Component {
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
 		return (
-			<div className={style.Room}>
+			<div className="Room">
 				<NavBar />
 
 				<div className="outer-wrapper">
@@ -33,8 +30,3 @@ class Room extends Component {
 		)
 	}
 }
-
-ReactDOM.render(
-	<Room />,
-	document.getElementById('root')
-)
