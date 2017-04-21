@@ -9,17 +9,20 @@ module.exports = {
 			'jquery',
 			'react',
 			'react-router-dom',
-			'history/createBrowserHistory'
+			'redux-atomic-action',
+			'immu-func',
+			'history',
+			'react-redux'
 		]
 	},
 
 	devServer: {
-		contentBase: path.join("./dist"),
-		compress: true,
-		port: 9000
+		contentBase: path.resolve(__dirname, 'dist'),
+		publicPath: '/',
+		port: 3000
 	},
 
-	context: path.resolve('./app'),
+	context: path.resolve('./src'),
 
 	output: {
 		path: path.resolve("./dist"),
@@ -33,10 +36,10 @@ module.exports = {
 		rules: [{
 			test: /\.(js|jsx)?$/,
 			include: [
-				path.resolve(__dirname, "app")
+				path.resolve(__dirname, "src")
 			],
 
-			use: ["babel-loader", path.resolve("webpack/react-css-modules-loader")]
+			use: ["babel-loader", "react-css-modules-loader"]
 		}, {
 			test: /\.html?$/,
 
@@ -98,12 +101,8 @@ module.exports = {
 	resolve: {
 		modules: [
 			"node_modules",
-			path.resolve("./app")
+			path.resolve("./src")
 		],
-
-		alias: {
-			app: path.resolve('./app')
-		},
 
 		extensions: ['.js', '.json', '.jsx', '.styl', '.css'],
 	},

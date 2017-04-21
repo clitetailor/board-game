@@ -1,0 +1,51 @@
+@import '../styles.styl'
+
+$input-height = 48px
+$input-width = 500px
+
+.large-input
+	position relative
+
+	background white
+	width $input-width
+	height $input-height
+
+	border-radius $border-radius-small
+	box-shadow $box-shadow-primary
+
+	cursor text
+	user-select none
+	for vendor in vendors
+		{vendor}-cursor text
+		{vendor}-user-select none
+
+	input, label
+		position absolute
+		top 8px
+		bottom 8px
+		left 30px
+		right 30px
+
+		font-family Lato
+		font-size 20px
+
+	label
+		color $font-light
+		background transparent
+		font-weight normal
+		text-transform uppercase
+
+		&.invisible
+			color transparent
+		
+	&.focus label
+		color transparent
+
+	input
+		width $input-width - 60px
+		background transparent
+		
+		color $font-smooth
+		border none;
+		outline none
+		transition all ease-in-out $speed-rapid

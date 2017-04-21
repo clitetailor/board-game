@@ -1,0 +1,75 @@
+.app
+	display flex
+
+	width 100%
+	height 100%
+
+	padding 0
+	margin 0
+
+	.left
+		display flex
+		flex-flow column nowrap
+		justify-content center
+
+		position relative
+
+		width 50%
+
+		background gold
+		box-shadow 1px 0 3px alpha(#000, 0.2)
+
+		z-index 1
+
+		.nav-bar
+			display flex
+
+			position absolute
+			top 0
+
+			height 60px
+			width 100%
+
+			align-items center
+
+			.brand
+				font-family "CAC Champagne"
+				font-size 40px
+				font-weight bold
+
+				color white
+
+				h1
+					margin 0
+		
+		.content
+			display flex
+			justify-content center
+
+			.form
+				display flex
+				flex-flow column nowrap
+				
+				justify-content center
+				align-items center
+
+				.line
+					margin-bottom 14px
+
+				.button-group
+					*
+						margin 5px
+
+	.image-layout
+		display flex
+		justify-content center
+		align-items center
+
+		width 50%
+
+		overflow hidden
+
+		img
+			flex 0 0 auto
+
+			height 100%

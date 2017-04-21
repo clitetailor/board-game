@@ -1,21 +1,22 @@
-let express = require('express'),
+const express = require('express'),
 	app = express(),
+	server = require('http').createServer(app),
+	io = require('socket.io')(server),
 	path = require('path'),
 	cors = require('cors'),
-	jwt = require('jsonwebtoken'),
-	fs = require('fs');
+	expressJwt = require('express-jwt'),
+	socketioJwt = require('socketio-jwt')
+	fs = require('fs'),
+	jwt = require('jsonwebtoken');
 
-let MongoClient = require('mongodb').MongoClient,
-	url = 'mongodb://localhost:27017/myproject',
+const MongoClient = require('mongodb').MongoClient,
+	url = 'mongodb://localhost:27017/chess',
 	Conn = MongoClient.connect(url);
 
-let bodyParser = require('body-parser'),
+const bodyParser = require('body-parser'),
 	multer = require('multer'),
 	upload = multer(),
 	port = 9000;
-
-
-let cert = fs.readFileSync(path.resolve('./cert/alice.crt'), 'utf-8');
 
 
 /**
@@ -24,8 +25,12 @@ let cert = fs.readFileSync(path.resolve('./cert/alice.crt'), 'utf-8');
  */
 
 
-
 app.use(cors())
+app.use('/users', expressJwt({
+	secret: "my top secret!"
+}).unless({ path: ['/js', '/assets', '/css', '/signup', '/'] }))
+
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/js', express.static(path.resolve('./dist/js')))
@@ -34,50 +39,39 @@ app.use('/css', express.static(path.resolve('./dist/css')))
 
 
 
-let server = app.listen(process.env.PORT || port, () => {
-	let port = server.address().port;
+server.listen(process.env.PORT || port, () => {
+	const port = server.address().port;
 	console.log(`App listening on port ${port}`);
 })
 
-app.get('/', (req, res) => {
+app.get(['/', '/entrance', '/signup'], (req, res) => {
 	res.sendFile(path.resolve('./dist/index.html'));
 })
 
-app.get('/signup', (req, res) => {
+app.get('/rooms/:id', (req, res) => {
 	res.sendFile(path.resolve('./dist/index.html'));
 })
-
-app.get('/room', (req, res) => {
-	res.sendFile(path.resolve('./dist/index.html'));
-})
-
-app.get('/gameplay', (req, res) => {
-	res.sendFile(path.resolve('./dist/index.html'));
-})
-
-
-
 
 
 app.post('/login', upload.array(), (req, res) => {
-	let username = req.body.username;
-	let password = req.body.password;
+	const username = req.body.username;
+	const password = req.body.password;
 
 	console.log({ username, password });
 
 	Conn.then(db => {
-		let Users = db.collection('users');
 
+		const Users = db.collection('users');
 		Users.findOne({ username }).then(result => {
-			if (result.password !== password) {
-				res.status(200).json({
-					code: 1,
-					err: "PASSWORD_INCORRECT"
-				})
+
+			if (result.password === password) {
+
+				const token = jwt.sign({ username }, 'my top secret!')
+				res.status(200).json(token)
+
 			} else {
-				res.status(200).json(jwt.sign({
-					exp: 1000 * 86400 
-				}))
+
+				res.status(401).send("Invalid Password")
 			}
 		})
 	})
@@ -86,23 +80,29 @@ app.post('/login', upload.array(), (req, res) => {
 
 
 app.post('/signup', upload.array(), (req, res) => {
-	let username = req.body.username;
-	let password = req.body.password;
+	const username = req.body.username;
+	const password = req.body.password;
 
-	console.log({ username, password });
+	console.log({ username, password })
+
+	if (username === '' || password === '') {
+		res.status()
+	}
 
 	Conn.then(db => {
-		let Users = db.collection('users');
+		const Users = db.collection('users');
 
-		Users.insertOne({ username, password }).then(() => {
-			res.sendStatus(200);
-		})
+		Users.insertOne({ username, password })
+			.then(() => {
+
+				const token = jwt.sign({ username }, 'my top secret!')
+
+				res.sendStatus(200).json(token);
+			})
 			.catch(err => {
 				console.log(err);
 
-				res.status(200).json({
-					err: "USERNAME_ALREADY_EXISTS"
-				})
+				res.status(409).send('Username already exists')
 			});
 	})
 		.catch((err) => {
@@ -111,3 +111,27 @@ app.post('/signup', upload.array(), (req, res) => {
 			res.sendStatus(500);
 		})
 })
+
+io.on('connection', socketioJwt.authorize({
+	secret: "my top secret!"
+}))
+	.on('authenticated', socket => {
+
+	})
+	.on('join-room', (socket, room) => {
+		Conn.then(db => {
+			const Rooms = db.collection('rooms');
+
+			Rooms.findOneAndUpdate({
+				_id: room._id
+			}, {
+					$cond: {
+						if: {
+							$gt: ["$max-players", "$players"],
+						},
+						then: { $inc: { player: 1 } }
+					}
+				})
+			.then()
+		})
+	})

@@ -1,0 +1,25 @@
+@import '../styles.styl'
+
+.dialog-layout
+	display flex
+	justify-content center
+	align-items center
+
+	position absolute
+	top 0
+	right 0
+	left 0
+	bottom 0
+
+	background alpha(#000, 0.1)
+
+	visibility hidden
+
+	z-index 1000
+
+	&.open
+		visibility visible
+		
+	.dialog
+		min-width 200px
+		min-height 80px
