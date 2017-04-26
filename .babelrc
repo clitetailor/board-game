@@ -1,16 +1,11 @@
 {
 	"presets": [
-		[
-			"es2015",
-			{
-				"modules": false
-			}
-		]
+		"es2015",
+		"react",
+		"stage-0"
 		// webpack understands the native import syntax, and uses it for tree shaking
 	],
 	"plugins": [
-		"transform-react-jsx",
-		"react-hot-loader/babel"
-		// Enables React code to work with HMR.
+		"transform-decorators-legacy"
 	]
 }

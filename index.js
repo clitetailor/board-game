@@ -62,31 +62,35 @@ app.post('/login', upload.array(), (req, res) => {
 	Conn.then(db => {
 
 		const Users = db.collection('users');
-		Users.findOne({ username }).then(result => {
+		Users.findOne({ username })
+			.then(result => {
 
-			if (result.password === password) {
+				if (result.password === password) {
 
-				const token = jwt.sign({ username }, 'my top secret!')
-				res.status(200).json(token)
+					const token = jwt.sign({ username }, 'my top secret!')
+					res.status(200).json(token)
 
-			} else {
+				} else {
 
-				res.status(401).send("Invalid Password")
-			}
-		})
+					res.status(401).send("Invalid username or password")
+				}
+			})
+			.catch(err => {
+
+				res.status(401).send("Invalid username or password")
+			})
 	})
 })
 
 
 
 app.post('/signup', upload.array(), (req, res) => {
-	const username = req.body.username;
-	const password = req.body.password;
+	const { username, password } = req.body;
 
 	console.log({ username, password })
 
-	if (username === '' || password === '') {
-		res.status()
+	if (!username || !password || username.match(/$^|\s+/) || password.match(/$^|\s+/)) {
+		res.status(401).send("Invalid username or password")
 	}
 
 	Conn.then(db => {
@@ -94,10 +98,8 @@ app.post('/signup', upload.array(), (req, res) => {
 
 		Users.insertOne({ username, password })
 			.then(() => {
-
 				const token = jwt.sign({ username }, 'my top secret!')
-
-				res.sendStatus(200).json(token);
+				res.status(200).json(token);
 			})
 			.catch(err => {
 				console.log(err);
@@ -105,18 +107,39 @@ app.post('/signup', upload.array(), (req, res) => {
 				res.status(409).send('Username already exists')
 			});
 	})
-		.catch((err) => {
+		.catch(err => {
 			console.log(err);
 
-			res.sendStatus(500);
+			res.status(500);
 		})
 })
+
+
 
 io.on('connection', socketioJwt.authorize({
 	secret: "my top secret!"
 }))
 	.on('authenticated', socket => {
 
+	})
+	.on('new-room', (socket, room) => {
+		Conn.then(db => {
+			const Rooms = db.collection('rooms');
+
+			const maxPlayers = room.maxPlayers >= 10
+				? 10
+				: maxPlayers > 1
+					? room.maxPlayers
+					: 2;
+
+			Rooms.insertOne({
+				title: room.title,
+				players: 1,
+				['max-players']: room.maxPlayers
+			}).then(room => {
+				socket.emit('new-room-created', room);
+			})
+		})
 	})
 	.on('join-room', (socket, room) => {
 		Conn.then(db => {
@@ -129,7 +152,7 @@ io.on('connection', socketioJwt.authorize({
 						if: {
 							$gt: ["$max-players", "$players"],
 						},
-						then: { $inc: { player: 1 } }
+						then: { $inc: { players: 1 } }
 					}
 				})
 			.then()

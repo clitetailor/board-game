@@ -1,9 +1,16 @@
-import React, { Component } from 'react'
-import styles from './large-input.styl'
+import * as React from 'react'
+import { toClassName, removeKeys } from '../../utils/class-name'
+import styles from './normal-input.styl'
 
-import { removeKeys, toClassName, filterKeys } from '../../utils/class-name';
+class NormalInput extends React.Component<any, any> {
+	private wrapper;
+	private label;
+	private textInput;
 
-class LargeInput extends Component {
+	public static defaultProps = {
+		type: 'input'
+	}
+
 	constructor(props) {
 		super(props);
 
@@ -15,24 +22,27 @@ class LargeInput extends Component {
 	render() {
 		return (
 			<div
-				className={[styles.largeInput, this.props.className].join(' ')}
+				className="normal-input"
 				ref={(wrapper) => { this.wrapper = wrapper }}
 				onClick={() => { this.onClick() }}
 			>
 				<label
-					className={toClassName({ [styles.invisible]: this.state.labelInvisible })}
-					htmlFor={this.props.name}
+					className={toClassName({
+						[styles.invisible]: this.state.labelInvisible
+					})}
+					htmlFor={this.props.label}
 					ref={(label) => { this.label = label }}
 				>
 					{this.props.label}
 				</label>
 				<input
+					name={this.props.label}
+					type={this.props.type}
 					ref={(input) => { this.textInput = input }}
 					onChange={() => { this.inputCheck() }}
 					onBlur={() => { this.onBlur() }}
 					onFocus={() => { this.onFocus() }}
-					name={this.props.name}
-					{...removeKeys(this.props, ['label', 'className', 'style']) }
+					{...this.props }
 				/>
 			</div>
 		)
@@ -40,7 +50,7 @@ class LargeInput extends Component {
 
 	inputCheck() {
 		this.setState(state => state.assign({
-			labelInvisible: this.textInput.value ? true : false
+			labelInvisible: this.textInput.value == "" ? false : true
 		}))
 	}
 
@@ -49,16 +59,16 @@ class LargeInput extends Component {
 	}
 
 	focus() {
-		this.wrapper.classList.add(styles.focus);
+		this.wrapper.classList.add('focus');
 		this.textInput.focus();
 	}
 
 	onFocus() {
-		this.wrapper.classList.add(styles.focus);
+		this.wrapper.classList.add('focus');
 	}
 
 	onBlur() {
-		this.wrapper.classList.remove(styles.focus);
+		this.wrapper.classList.remove('focus');
 	}
 
 	get value() {
@@ -70,8 +80,4 @@ class LargeInput extends Component {
 	}
 }
 
-LargeInput.defaultProps = {
-	type: 'input'
-}
-
-export { LargeInput }
+export { NormalInput }

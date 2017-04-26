@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 
-export class Bundle extends Component {
+export class Bundle extends React.Component<any, any> {
 	constructor(props) {
 		super(props);
 

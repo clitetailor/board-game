@@ -1,6 +1,6 @@
 [*]
 charset=utf-8
 
-[**.{styl,html,jsx,js,json}]
+[**.{styl,html,jsx,js,json,ts,tsx}]
 indent_style=tab
-indent_size=2
+indent_size=4

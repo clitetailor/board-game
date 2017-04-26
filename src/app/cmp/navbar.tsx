@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import styles from './NavBar.styl'
+import * as React from 'react'
+import * as styles from './NavBar.styl'
 
-export class NavBar extends Component {
+export class NavBar extends React.Component<any, any> {
     render() {
         return (
 			<nav className="nav-bar">

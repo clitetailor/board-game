@@ -2,31 +2,30 @@
 
 .entrance
 	display flex
-	flex-flow column nowrap
 
 	width 100%
 	height 100%
 
-	.outer-wrapper
+	.left
 		display flex
 		flex-flow column nowrap
 
-		align-items center
+		flex 1 1 60vw
 
-		width 100%
-		flex 1 1 auto
+		align-items center
 
 		padding 60px
 
 		.search-box
-			margin-bottom 20px
-		
-		.new-room-button
-			margin-bottom 24px
+			margin-bottom 100px
 
 		.rooms
+			align-self stretch
+			
 			.room
-				width 800px
+				max-width 720px
+
+				margin auto
 
 				.line
 					display flex
@@ -44,3 +43,20 @@
 					
 					.large-button
 						flex 0 0 auto
+	
+	.right
+		flex 1 1 40vw
+
+		padding 60px
+
+		box-shadow 0 0 10px #aaa
+		
+		.form
+			display flex
+			flex-flow column nowrap
+			
+			justify-content center
+			align-items center
+
+			.line
+				margin-bottom 30px

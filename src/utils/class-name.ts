@@ -2,8 +2,8 @@ export function toClassName(object) {
 	return Object.keys(object).filter(item => object[item] === true).join(' ');
 }
 
-export function removeKeys(props, keys) {
-	const newProps = Object.assign({}, props);
+export function removeKeys(props: any, keys: string[]) {
+	const newProps = Object.assign({ }, props);
 
 	for (const key of keys) {
 		delete newProps[key];
@@ -12,8 +12,8 @@ export function removeKeys(props, keys) {
 	return newProps;
 }
 
-export function filterKeys(props, keys) {
-	const newProps = {};
+export function filterKeys(props: any, keys: string[]) {
+	const newProps: any = {};
 
 	for (const key of keys) {
 		newProps[key] = props[key];

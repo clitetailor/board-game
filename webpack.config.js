@@ -4,29 +4,23 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
 	entry: {
-		index: 'index.jsx',
+		index: 'index.tsx',
 		vendor: [
 			'jquery',
 			'react',
 			'react-router-dom',
-			'redux-atomic-action',
 			'immu-func',
-			'history',
-			'react-redux'
+			'mobx',
+			'mobx-react',
+			'leroy'
 		]
-	},
-
-	devServer: {
-		contentBase: path.resolve(__dirname, 'dist'),
-		publicPath: '/',
-		port: 3000
 	},
 
 	context: path.resolve('./src'),
 
 	output: {
 		path: path.resolve("./dist"),
-		filename: "js/[name].js",
+		filename: "js/[name].js"
 	},
 
 	devtool: "source-map",
@@ -34,12 +28,9 @@ module.exports = {
 
 	module: {
 		rules: [{
-			test: /\.(js|jsx)?$/,
-			include: [
-				path.resolve(__dirname, "src")
-			],
-
-			use: ["babel-loader", "react-css-modules-loader"]
+			test: /\.(tsx|ts)?$/, loader: ["awesome-typescript-loader", "react-css-modules-loader"]
+		}, {
+			enforce: "pre", test: /\.js$/, loader: "source-map-loader"
 		}, {
 			test: /\.html?$/,
 
@@ -82,14 +73,7 @@ module.exports = {
 				}
 			})
 		}, {
-			test: /\.(png|jpg|jpeg|svg|ico)$/,
-			loader: 'file-loader',
-			query: {
-				name: 'assets/[hash].[ext]',
-				publicPath: '/'
-			}
-		}, {
-			test: /\.(woff2?|ttf|eot)$/,
+			test: /\.(png|jpg|jpeg|svg|ico|woff2?|ttf|eot)$/,
 			loader: 'file-loader',
 			query: {
 				name: 'assets/[hash].[ext]',
@@ -104,7 +88,7 @@ module.exports = {
 			path.resolve("./src")
 		],
 
-		extensions: ['.js', '.json', '.jsx', '.styl', '.css'],
+		extensions: ['.ts', '.tsx', '.js', '.json', '.jsx', '.styl', '.css'],
 	},
 
 	plugins: [

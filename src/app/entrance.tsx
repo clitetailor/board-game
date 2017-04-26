@@ -1,37 +1,39 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { LargeButton, LargeInput, Dialog, Card } from './cmp'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import styles from './entrance.styl'
+import * as styles from './entrance.styl'
 
-class Entrance extends Component {
-	constructor(props) {
-		super(props);
+import { observer } from 'mobx-react'
 
-		this.state = {
-			rooms: [{
-				_id: "31234132",
-				title: "Are you dare?"
-			}]
-		}
+@observer
+class Entrance extends React.Component<any, any> {
+	componentWillMount() {
+		this.props.roomService.liveUpdateRooms();
+	}
+
+	componentWillUnmount() {
+		this.props.roomService.liveUpdate = false;
+	}
+
+	submitNewRoom() {
+		
 	}
 
 	render() {
 		return (
 			<div className="entrance">
-				<Dialog/>
+				<Dialog />
 
-				<div className="outer-wrapper">
+				<div className="left">
 					<LargeInput
 						type="input"
 						label="search-box"
 						className="search-box"
 					/>
 
-					<LargeButton className="new-room-button">New</LargeButton>
-
 					<div className="rooms">
-						{this.state.rooms.map(room => 
+						{this.props.roomService.rooms.map(room => 
 							<Card
 								key={room._id}
 								className="room"
@@ -51,11 +53,25 @@ class Entrance extends Component {
 						)}
 					</div>
 				</div>
+				
+				<div className="right">
+					<form
+						action="/"
+						className="form"
+						onSubmit={() => this.submitNewRoom()}
+					>
+						<div className="line">
+							<LargeInput
+								type="input"
+								label="Room name"
+							/>
+						</div>
+						<LargeButton>New</LargeButton>
+					</form>
+				</div>
 			</div>
 		)
 	}
 }
-
-Entrance = withRouter(connect(state => state)(Entrance))
 
 export { Entrance }

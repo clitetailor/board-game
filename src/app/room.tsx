@@ -1,32 +1,18 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { LargeButton, LargeInput, Card } from './cmp'
-import styles from './room.styl'
+import * as styles from './room.styl'
 
-import icon from '../assets/logo.svg'
+import { observer } from 'mobx-react'
 
-export class Room extends Component {
-	constructor(props) {
-		super(props);
+import * as icon from '../assets/logo.svg'
 
-		this.state = {
-			players: [
-				{
-					_id: 1232131,
-					name: "Clite Tailor",
-					level: 13
-				}, {
-					_id: 4324234,
-					name: "Evan Christ",
-					level: 20
-				}
-			]
-		}
-	}
-
+@observer
+export class Room extends React.Component<any, any> {
 	playerPositions(length, render) {
 		return Array.from({ length }, (v, k) => k)
-			.map(k => this.state.players[k])
+			.map(k => k < this.props.roomService.players.length ?
+				this.props.roomService.players[k] : null)
 			.map(render);
 	}
 

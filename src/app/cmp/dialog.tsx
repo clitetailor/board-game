@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { removeKeys, toClassName } from '../../utils/class-name'
 import { Card } from './card'
-import styles from './dialog.styl'
+import * as styles from './dialog.styl'
+import { leroy } from 'leroy'
 
-export class Dialog extends Component {
+export class Dialog extends React.Component<any, any> {
 	constructor(props) {
 		super(props);
 
@@ -15,13 +16,17 @@ export class Dialog extends Component {
 	render() {
 		return (
 			<div
-				className={toClassName({
-					[styles['dialog-layout']]: true,
-					[styles['open']]: this.state.visibility
-				}) + " " + this.props.className}
+				className={leroy(styles)
+					.cls('dialog-layout')
+					.add('open', this.state.visibility)
+					.join(this.props.className)
+					.put()}
 			>
 				<Card
-					className={[styles['dialog'], this.props.className].join(' ')}
+					className={leroy(styles)
+						.cls('dialog')
+						.join(this.props.className)
+						.put()}
 					{...removeKeys(this.props, ['className']) }
 				/>
 			</div>
