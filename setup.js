@@ -7,7 +7,7 @@ let Conn = MongoClient.connect(url);
 
 Conn.then(db => {
 	db.createCollection('users', (err, Users) => {
-		Users.createIndex({ username: "text" }, { unique: true }, (err) => {
+		Users.createIndex({ username: 1 }, { unique: true }, (err) => {
 			if (err) {
 					console.log(err);
 			} else {
