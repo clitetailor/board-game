@@ -27,6 +27,7 @@ export class Signup extends React.Component<any, any> {
 		return (
 			<div className="signup">
 				<form
+					action=""	
 					className="form"
 					onSubmit={() => this.submit()}
 				>
@@ -59,3 +60,5 @@ export class Signup extends React.Component<any, any> {
 		)
 	}
 }
+
+export default Signup;

@@ -4,10 +4,18 @@ import { Link, Redirect } from 'react-router-dom'
 import { leroy } from 'leroy'
 import { observer } from 'mobx-react'
 
+import { AuthService } from '../services/auth'
+import { RoomService } from '../services/room'
+
 import * as image from '../assets/chess.jpg'
 import * as styles from './app.styl'
 
-export class App extends React.Component<any, any> {
+export interface IAppProps {
+	auth: AuthService,
+	roomService: RoomService
+}
+
+export class App extends React.Component<IAppProps, any> {
 	private uInput: LargeInput;
 	private pInput: LargeInput;
 
@@ -16,14 +24,14 @@ export class App extends React.Component<any, any> {
 	}
 
 	submit() {
-		this.props.auth.signup(this.uInput.value, this.pInput.value);
+		this.props.auth.login(this.uInput.value, this.pInput.value);
 	}
 
 	render() {
 		if (this.props.auth.authenticated) {
 			return (
 				<div className="app">
-					<Redirect to="/entrance" />
+					<Redirect to="/entrance" push={true} />
 				</div>
 			)
 		}
@@ -40,7 +48,7 @@ export class App extends React.Component<any, any> {
 
 					<div className="content">
 						<form
-							action="#"
+							action=""
 							className="form"
 							onSubmit={() => { this.submit() }}
 						>
@@ -89,3 +97,5 @@ export class App extends React.Component<any, any> {
 		)
 	}
 }
+
+export default App;

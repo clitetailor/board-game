@@ -1,8 +1,6 @@
 import * as $ from 'jquery'
 import { observable } from 'mobx'
 
-declare const localStorage: any;
-
 export class AuthService {
 	@observable authenticated : boolean = false;
 	@observable authenticateFailed : string = undefined;
@@ -13,8 +11,8 @@ export class AuthService {
 	}
 
 	_authenticated(token) {
-		console.log(token);
 		localStorage.setItem('authToken', token || null);
+		console.log(localStorage.getItem('authToken'))
 		this.authenticated = true;
 	}
 

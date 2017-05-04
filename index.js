@@ -6,7 +6,7 @@ const express = require('express'),
 	cors = require('cors'),
 	expressJwt = require('express-jwt'),
 	socketioJwt = require('socketio-jwt')
-	fs = require('fs'),
+fs = require('fs'),
 	jwt = require('jsonwebtoken');
 
 const MongoClient = require('mongodb').MongoClient,
@@ -17,12 +17,6 @@ const bodyParser = require('body-parser'),
 	multer = require('multer'),
 	upload = multer(),
 	port = 9000;
-
-
-/**
- * 200: OK
- * 500: Internal Server Error
- */
 
 
 app.use(cors())
@@ -38,7 +32,6 @@ app.use('/assets', express.static(path.resolve('./dist/assets')))
 app.use('/css', express.static(path.resolve('./dist/css')))
 
 
-
 server.listen(process.env.PORT || port, () => {
 	const port = server.address().port;
 	console.log(`App listening on port ${port}`);
@@ -52,12 +45,9 @@ app.get('/rooms/:id', (req, res) => {
 	res.sendFile(path.resolve('./dist/index.html'));
 })
 
-
 app.post('/login', upload.array(), (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
-
-	console.log({ username, password });
 
 	Conn.then(db => {
 
@@ -90,22 +80,29 @@ app.post('/signup', upload.array(), (req, res) => {
 	console.log({ username, password })
 
 	if (!username || !password || username.match(/$^|\s+/) || password.match(/$^|\s+/)) {
-		res.status(401).send("Invalid username or password")
+		res.status(401).send("Invalid username or password");
+		return;
 	}
 
 	Conn.then(db => {
 		const Users = db.collection('users');
 
-		Users.insertOne({ username, password })
-			.then(() => {
-				const token = jwt.sign({ username }, 'my top secret!')
-				res.status(200).json(token);
+		Users.findOne({ username })
+			.then(data => {
+				res.status(409).send('Username already exists')
 			})
 			.catch(err => {
+				Users.insertOne({ username, password })
+					.then(data => {
+						console.log(data);
+						const token = jwt.sign({ username }, 'my top secret!')
+						res.status(200).json(token);
+					})
+					.catch(err => {
+						console.log(err);
+					})
 				console.log(err);
-
-				res.status(409).send('Username already exists')
-			});
+			})
 	})
 		.catch(err => {
 			console.log(err);
@@ -115,46 +112,93 @@ app.post('/signup', upload.array(), (req, res) => {
 })
 
 
-
 io.on('connection', socketioJwt.authorize({
-	secret: "my top secret!"
+	secret: "my top secret!",
+	timeout: 15000 // 15 seconds to send the authentication message
 }))
-	.on('authenticated', socket => {
 
-	})
-	.on('new-room', (socket, room) => {
+io.on("authenticated", (socket) => {
+	socket.on('create-new-room', (room) => {
 		Conn.then(db => {
 			const Rooms = db.collection('rooms');
 
-			const maxPlayers = room.maxPlayers >= 10
-				? 10
-				: maxPlayers > 1
-					? room.maxPlayers
-					: 2;
+			const maxPlayers = !room.maxPlayers
+				? 4 :
+				room.maxPlayers >= 10
+					? 10
+					: room.maxPlayers > 1
+						? room.maxPlayers
+						: 2;
+			console.log(maxPlayers)
 
 			Rooms.insertOne({
 				title: room.title,
 				players: 1,
-				['max-players']: room.maxPlayers
-			}).then(room => {
-				socket.emit('new-room-created', room);
+				maxPlayers: room.maxPlayers
 			})
+				.then(result => {
+					console.log(result);
+
+					socket.emit('new-room-created', Object.assign({}, room, {
+						_id: result.insertedId
+					}));
+				})
+				.catch(err => {
+					console.log(err);
+				})
 		})
+			.catch(err => {
+				console.log(err);
+			})
 	})
-	.on('join-room', (socket, room) => {
+
+	socket.on('request-join-room', (room) => {
 		Conn.then(db => {
 			const Rooms = db.collection('rooms');
 
-			Rooms.findOneAndUpdate({
+			Rooms.findOne({
+				_id: room._id
+			})
+				.then(room => {
+					if (room.maxPlayers > room.players) {
+						this.emit('approved', room);
+					}
+					else {
+						socket.broadcast(socket.id);
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				})
+		})
+	})
+
+	socket.on('join-room', (room) => {
+		Conn.then(db => {
+			const Rooms = db.collection('rooms');
+
+			Rooms.update({
 				_id: room._id
 			}, {
 					$cond: {
 						if: {
-							$gt: ["$max-players", "$players"],
+							$gt: ['$maxPlayers', '$players']
 						},
-						then: { $inc: { players: 1 } }
+						then: {
+							$inc: {
+								$players: 1
+							}
+						}
 					}
 				})
-			.then()
+				.then(room => {
+					console.log(room);
+
+					socket.join('room', room._id);
+				})
+				.catch(err => {
+					console.log(err);
+				})
 		})
 	})
+})

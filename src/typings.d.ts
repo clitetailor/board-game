@@ -6,6 +6,8 @@ declare module "*.svg";
 declare module "*.html";
 declare module "*.css";
 
+declare module "bundle*";
+
 declare module "leroy" {
 	export class Leroy {
 		add(className: string, force: boolean)

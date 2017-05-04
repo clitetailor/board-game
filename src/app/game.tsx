@@ -9,3 +9,5 @@ export class Game extends React.Component<any, any> {
 		)
 	}
 }
+
+export default Game;

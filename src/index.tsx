@@ -12,11 +12,10 @@ import { AuthService } from './services/auth'
 import { RoomService } from './services/room'
 
 import { Bundle } from './bundle'
-import { App } from './app/app'
-import { Entrance } from './app/entrance'
-import { Signup } from './app/signup'
-import { Room } from './app/room'
-import { Game } from './app/game'
+import * as loadApp from 'bundle-loader?lazy&name=[name]!./app/app';
+import * as loadEntrance from 'bundle-loader?lazy&name=[name]!./app/entrance';
+import * as loadSignup from 'bundle-loader?lazy&name=[name]!./app/signup';
+import * as loadRoom from 'bundle-loader?lazy&name=[name]!./app/game';
 import './index.html'
 import './index.css'
 import './assets/favicon.ico'
@@ -24,28 +23,34 @@ import './assets/favicon.ico'
 interface AppRoute {
 	exact?: boolean,
 	path: string,
-	component: any
+	lazyLoad: any
 }
 
 const authService = new AuthService();
 const roomService = new RoomService();
 
 const appRoutes: AppRoute[] = [
-	{ exact: true, path: '/', component: App },
-	{ path: '/entrance', component: Entrance },
-	{ path: '/rooms', component: Room },
-	{ path: '/game', component: Game },
-	{ path: '/signup', component: Signup }
+	{ exact: true, path: '/', lazyLoad: loadApp },
+	{ path: '/entrance', lazyLoad: loadEntrance },
+	{ path: '/rooms', lazyLoad: loadRoom },
+	{ path: '/signup', lazyLoad: loadSignup }
 ]
 
 ReactDOM.render(
 	<BrowserRouter><div>
-		{appRoutes.map(({ component: Component, path, exact }) => (
+		{appRoutes.map(({ lazyLoad , path, exact }) => (
 			<Route
 				exact key={path}
 				path={path}
 				render={() =>
-					<Component auth={authService} roomService={roomService}></Component>}
+					<Bundle load={lazyLoad}>
+						{Component => (
+							<Component
+								auth={authService}
+								roomService={roomService}
+							/>
+						)}
+					</Bundle>}
 			/>
 		))}
 	</div></BrowserRouter>,

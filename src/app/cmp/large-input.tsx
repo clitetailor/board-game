@@ -31,23 +31,24 @@ class LargeInput extends React.Component<any, any> {
 				ref={(wrapper) => { this.wrapper = wrapper }}
 				onClick={() => { this.onClick() }}
 			>
-				<label
-					className={leroy(styles)
-						.add('invisible', this.state.labelInvisible)
-						.put()}
-					htmlFor={this.props.name}
-					ref={(label) => { this.label = label }}
-				>
-					{this.props.label}
-				</label>
-				<input
-					ref={(input) => { this.textInput = input }}
-					onChange={() => { this.inputCheck() }}
-					onBlur={() => { this.onBlur() }}
-					onFocus={() => { this.onFocus() }}
-					name={this.props.name}
-					{...removeKeys(this.props, ['label', 'className', 'style']) }
-				/>
+							<label
+								className={leroy(styles)
+									.add('invisible', this.state.labelInvisible)
+									.put()}
+								htmlFor={this.props.name}
+								ref={(label) => { this.label = label }}
+							>
+								{this.props.label}
+							</label>
+							
+							<input
+								ref={(input) => { this.textInput = input }}
+								onChange={() => { this.inputCheck() }}
+								onBlur={() => { this.onBlur() }}
+								onFocus={() => { this.onFocus() }}
+								name={this.props.name}
+								{...removeKeys(this.props, ['label', 'className', 'style']) }
+							/>
 			</div>
 		)
 	}

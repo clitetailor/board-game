@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "server": "ng serve",
     "build": "webpack --watch --progress --colors --env production",
     "db": "mongod --dbpath=./data",
     "analyser": "webpack --json | webpack-bundle-size-analyzer"
@@ -16,6 +17,8 @@
     "@types/node": "^7.0.13",
     "@types/react": "^15.0.22",
     "@types/react-dom": "^15.5.0",
+    "@types/react-router-dom": "^4.0.4",
+    "@types/socket.io-client": "^1.4.29",
     "@types/stylus": "^0.48.27",
     "awesome-typescript-loader": "^3.1.2",
     "babel-plugin-react-css-modules": "^2.6.0",
@@ -49,6 +52,7 @@
     "typescript": "^2.2.2"
   },
   "devDependencies": {
+    "@angular/cli": "^1.0.2",
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
